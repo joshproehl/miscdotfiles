@@ -29,5 +29,7 @@ source $ZSH/oh-my-zsh.sh
 PATH=$HOME/.bin:$HOME/.rbenv/bin:$PATH
 eval "$(rbenv init -)"
 
+alias vi="vim"
 alias gpoh="git push origin HEAD"
 alias be="bundle exec"
+alias t="todo.sh"
