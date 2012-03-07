@@ -3,6 +3,7 @@ task :bootstrap do
   s_link("zshrc", "~/.zshrc")
   s_link("joshproehl.zsh-theme", "~/.oh-my-zsh/themes/joshproehl.zsh-theme")
   s_link("todo.cfg", "~/.todo.cfg")
+  s_link("pentadactylrc", "~/.pentadactylrc")
 end
 
 # Create a symbolic link from the source to the target.
