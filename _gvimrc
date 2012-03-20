@@ -1,0 +1,3 @@
+" GVim specific configuration stuff goes here
+
+set guioptions-=T " No toolbar needed thanks

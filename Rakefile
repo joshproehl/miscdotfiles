@@ -1,9 +1,5 @@
-desc "boostrap all files by linking them to their correct locations"
-task :bootstrap do
-  puts "Setting up submodules"
-  `git submodule init`
-  `git submodule update`
-
+desc "link all files their correct locations"
+task :link do
   puts "AutoLinking all files with _* prefix to their ~/.* location."
   Dir.glob("_*") do |filename|
     newFilename = filename.gsub(/_/, "~/.")
@@ -46,3 +42,27 @@ def s_link(source_path, target_path)
     ln_s(File.expand_path(source_path), target_file)
   end
 end
+
+
+desc "rake make for Command-T"
+task :setup_command_t do
+  Dir.chdir File.expand_path("~/.vim/bundle/command-t/") do
+    if File.exists?("/usr/bin/ruby") # Use system ruby on OS-X if possible
+      sh "/usr/bin/ruby /usr/bin/rake make"
+    else
+      sh "rake make"
+    end
+  end
+end
+
+
+desc "Init and update all git submodules"
+task :submodule_init do
+  puts "Setting up submodules"
+  `git submodule init`
+  `git submodule update`
+end
+
+
+desc "Run this to perform all necessary tasks to setting up a completely new instance."
+task :bootstrap => [ :submodule_init, :link, :setup_command_t ]
