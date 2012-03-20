@@ -29,7 +29,10 @@ def s_link(source_path, target_path)
 
   if File.symlink?(target_file) and File.readlink(target_file).to_s != File.expand_path(source_path).to_s
     puts "  ! Existing symlink appears to point to incorrect file, moving it to #{target_file}.old"
-    mv(target_file, File.expand_path("#{target_path}.old"))
+    # Make a new link with the .old extension, pointing to the old target
+    ln_s(File.readlink(target_file), File.expand_path("#{target_path}.old"))
+    # Now we can get rid of the original target file to make room for the new link
+    rm(target_file)
   end
 
   # At this point either the target file is the symlink we want,
