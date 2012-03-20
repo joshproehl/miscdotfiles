@@ -1,3 +1,6 @@
 [submodule "bundle/ruby-build"]
 	path = bundle/ruby-build
 	url = git://github.com/sstephenson/ruby-build.git
+[submodule "_rbenv"]
+	path = _rbenv
+	url = git://github.com/sstephenson/rbenv.git
