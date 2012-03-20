@@ -1,5 +1,9 @@
 desc "boostrap all files by linking them to their correct locations"
 task :bootstrap do
+  puts "Setting up submodules"
+  `git submodule init`
+  `git submodule update`
+
   puts "AutoLinking all files with _* prefix to their ~/.* location."
   Dir.glob("_*") do |filename|
     newFilename = filename.gsub(/_/, "~/.")
