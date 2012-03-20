@@ -3,15 +3,18 @@ task :bootstrap do
   puts "AutoLinking all files with _* prefix to their ~/.* location."
   Dir.glob("_*") do |filename|
     newFilename = filename.gsub(/_/, "~/.")
-    puts "  - Moving #{filename} to #{newFilename}"
+    puts "  - Ensuring #{filename} linked to #{newFilename}"
     s_link(filename, newFilename)
   end
   puts "Done AutoLinking."
 
   puts "Handling manual stuff..."
-  #s_link("bundle/rbenv", "~/.rbenv")
-  #TODO: This will probably fail because the plugins/ directory doesn't exist. LN should force that to be created
-  #s_link("bundle/ruby_build", "~/.rbenv/plugins/ruby_build")
+  # Install the ruby-build plugin for rbenv only
+  if !File.exists?(File.expand_path("~/.rbenv/plugins/"))
+    mkdir File.expand_path("~/.rbenv/plugins/")
+  end
+  s_link("bundle/ruby-build", "~/.rbenv/plugins/ruby-build")
+  puts "Done bootstraping! Environment is set up."
 end
 
 # Create a symbolic link from the source to the target.
@@ -24,8 +27,8 @@ def s_link(source_path, target_path)
     mv(target_file, File.expand_path("#{target_path}.old"))
   end
 
-  if File.symlink?(target_file) and File.readlink(target_file).to_s != "target_path"
-    puts "  ! Existing symlink appears to point to incorrect file, moving it to #{target_path}.old"
+  if File.symlink?(target_file) and File.readlink(target_file).to_s != File.expand_path(source_path).to_s
+    puts "  ! Existing symlink appears to point to incorrect file, moving it to #{target_file}.old"
     mv(target_file, File.expand_path("#{target_path}.old"))
   end
 
