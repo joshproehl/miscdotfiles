@@ -8,13 +8,16 @@ task :link do
   end
   puts "Done AutoLinking."
 
-  puts "Handling manual stuff..."
+  puts "Handling manual links..."
   # Install the ruby-build plugin for rbenv only
   if !File.exists?(File.expand_path("~/.rbenv/plugins/"))
     mkdir File.expand_path("~/.rbenv/plugins/")
   end
   s_link("bundle/ruby-build", "~/.rbenv/plugins/ruby-build")
-  puts "Done bootstraping! Environment is set up."
+
+  s_link("joshproehl.zsh-theme", "~/.oh-my-zsh/custom/joshproehl.zsh-theme")
+
+  puts "Done Linking."
 end
 
 # Create a symbolic link from the source to the target.
@@ -46,6 +49,7 @@ end
 
 desc "rake make for Command-T"
 task :setup_command_t do
+  puts "Making command-T..."
   Dir.chdir File.expand_path("~/.vim/bundle/command-t/") do
     if File.exists?("/usr/bin/ruby") # Use system ruby on OS-X if possible
       sh "/usr/bin/ruby /usr/bin/rake make"
@@ -53,6 +57,7 @@ task :setup_command_t do
       sh "rake make"
     end
   end
+  puts "Done with Command-T!"
 end
 
 
