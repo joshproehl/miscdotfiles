@@ -2,7 +2,7 @@ desc "link all files their correct locations"
 task :link do
   puts "AutoLinking all files with _* prefix to their ~/.* location."
   Dir.glob("_*") do |filename|
-    newFilename = filename.gsub(/_/, "~/.")
+    newFilename = filename.gsub(/^_/, "~/.")
     puts "  - Ensuring #{filename} linked to #{newFilename}"
     s_link(filename, newFilename)
   end
@@ -15,6 +15,7 @@ task :link do
   end
   s_link("bundle/ruby-build", "~/.rbenv/plugins/ruby-build")
 
+  # Link in my own ZSH theme.
   s_link("joshproehl.zsh-theme", "~/.oh-my-zsh/custom/joshproehl.zsh-theme")
 
   puts "Done Linking."
