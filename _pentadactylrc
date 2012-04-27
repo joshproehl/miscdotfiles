@@ -7,5 +7,6 @@ highlight Hint::after content: attr(number) !important;
 set hintkeys=aoeuidhtnskxbmyfgc
 set defsearch=duckduckgo-ssl
 set passkeys=duckduckgo.com:jk<CR>
+set passkeys=duolingo.com:1234<CR>
 
 " vim: set ft=pentadactyl:
