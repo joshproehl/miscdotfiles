@@ -43,3 +43,6 @@
 [submodule "_oh-my-zsh"]
 	path = _oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
+[submodule "_vim/bundle/ctrlp.vim"]
+	path = _vim/bundle/ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
