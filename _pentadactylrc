@@ -2,9 +2,14 @@
 
 loadplugins '\.(js|penta)$'
 group user
-highlight Hint font: bold 10px "Droid Sans Mono", monospace !important; margin: -.2ex; padding: 0 0 0 1px; outline: 1px solid rgba(0, 0, 0, .5); background: rgba(255, 248, 231, .8); color: black; text-transform: uppercase;
+
+" Things about hinting
+highlight Hint font: bold 13px "Droid Sans Mono", monospace !important; margin: -.2ex; padding: 0 0 0 3px; outline: 1px solid rgba(0, 0, 0, .5); background: rgba(255, 248, 231, .8); color: black; text-transform: uppercase;
 highlight Hint::after content: attr(number) !important;
-set hintkeys=aoeuidhtnskxbmyfgc
+hi HintElem background-color: rgba(255, 255, 153, 1);
+set hintkeys=aoeuidhtnskxbmyfgc34567
+
+" Set up passkeys for various sites
 set defsearch=duckduckgo-ssl
 set passkeys=duckduckgo.com:jk<CR>
 set passkeys=duolingo.com:1234<CR>
