@@ -6,10 +6,16 @@ set nocompatible
 let mapleader = ";"
 
 " Tired of arrow keys, make it stop.
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+" But who wants to waste perfectly good keys? So let's have them switch
+" windows.
+nmap <Up> :wincmd k<CR>
+nmap <Down> :wincmd j<CR>
+nmap <Left> :wincmd h<CR>
+nmap <Right> :wincmd l<CR>
+inoremap <Right> <NOP>
+inoremap <Left> <NOP>
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
 
 " Set color and make GUI and Terminal look different
 colorscheme solarized
