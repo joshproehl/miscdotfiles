@@ -53,6 +53,10 @@ set hlsearch
 set incsearch
 set showmatch
 
+" Ctr-P is more useful in mixed mode
+let g:ctrlp_cmd = 'CtrlPMixed'
+map <c-b> :CtrlPBuffer<cr>
+
 " Handle case-sensitive searching in a smartish fashion.
 set ignorecase
 set smartcase
