@@ -55,3 +55,6 @@
 [submodule "_vim/bundle/neocomplcache"]
 	path = _vim/bundle/neocomplcache
 	url = https://github.com/Shougo/neocomplcache.git
+[submodule "_vim/bundle/vim-gnupg"]
+	path = _vim/bundle/vim-gnupg
+	url = https://github.com/jamessan/vim-gnupg.git
