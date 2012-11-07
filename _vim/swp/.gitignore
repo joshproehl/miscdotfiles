@@ -1,0 +1,4 @@
+# We want to ignore everything in this folder, but the folder needs to exist
+# so don't ignore this file itself.
+*
+!.gitignore
