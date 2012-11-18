@@ -49,3 +49,6 @@
 [submodule "_vim/bundle/vimwiki"]
 	path = _vim/bundle/vimwiki
 	url = https://github.com/vim-scripts/vimwiki.git
+[submodule "_vim/bundle/tagbar"]
+	path = _vim/bundle/tagbar
+	url = https://github.com/majutsushi/tagbar.git

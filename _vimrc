@@ -57,6 +57,9 @@ set showmatch
 let g:ctrlp_cmd = 'CtrlPMixed'
 map <c-b> :CtrlPBuffer<cr>
 
+" Add tagbar binding
+nmap <F8> :TagbarToggle<CR>
+
 " Handle case-sensitive searching in a smartish fashion.
 set ignorecase
 set smartcase
