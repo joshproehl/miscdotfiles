@@ -75,6 +75,9 @@ set directory=~/.vim/swp
 nnoremap <leader>n :NERDTreeToggle<cr>
 let g:NERDTreeWinPos = "right"
 
+" Set up neocomplcache
+let g:neocomplcache_enable_at_startup = 1
+
 " MacVim specific stuff (that can't be in gvimrc)
 let macvim_hig_shift_movement = 1
 
