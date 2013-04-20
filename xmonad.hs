@@ -1,4 +1,5 @@
 import XMonad
+import XMonad.Actions.CycleWS
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.FadeWindows
@@ -10,8 +11,8 @@ import XMonad.Layout.Grid
 import XMonad.Layout.IM
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Spacing
-import XMonad.Layout.Spiral -- TODO: Config
-import XMonad.Layout.MagicFocus -- TODO: Config
+import XMonad.Layout.Drawer -- TODO: Config
+import XMonad.Layout.Spiral
 import XMonad.Util.CustomKeys
 import XMonad.Util.Run(spawnPipe)
 import System.IO
@@ -41,7 +42,7 @@ myLayoutHook = avoidStruts $
   standardLayouts
   where
     tall = Tall 1 0.02  0.5
-    standardLayouts = tall ||| Mirror tall ||| Full
+    standardLayouts = tall ||| Mirror tall ||| Full ||| spiral (6/7)
     imLayout = withIM (1/5) (Role "buddy_list") Grid --(standardLayouts)
 
 
@@ -54,11 +55,18 @@ delKeys XConfig {modMask = modm} = []
 addKeys :: XConfig l -> [((KeyMask, KeySym), X ())]
 addKeys conf@(XConfig {modMask = modm}) =
   [ ((modm, xK_a), spawn "xmenud") -- Mod-A to open app menu
+
+  -- Cycle to workspaces
+  , ((modm,               xK_Right),  nextWS)
+  , ((modm,               xK_Left),   prevWS)
+  , ((modm .|. shiftMask, xK_Right),  shiftToNext)
+  , ((modm .|. shiftMask, xK_Left),   shiftToPrev)
+  , ((modm,               xK_Down),   nextScreen)
+  , ((modm,               xK_Up),     prevScreen)
   ]
 
-
 main = do
-  -- Launch xmobar using the config specificed in it's rc file.
+-- Launch xmobar using the config specificed in it's rc file.
   xmproc <- spawnPipe "/usr/bin/xmobar /home/joshproehl/.xmobarrc"
   -- spawn xscreensaver -nosplash
 
@@ -76,8 +84,13 @@ main = do
     , layoutHook = myLayoutHook
     , logHook = fadeWindowsLogHook myFadeHook <+> dynamicLogWithPP xmobarPP
                 { ppOutput = hPutStrLn xmproc
-                , ppTitle = xmobarColor "green" "" . shorten 50
+                , ppTitle = xmobarColor "green"  "" . shorten 50
                 , ppSep = " | "
+                , ppLayout =
+                    (\ x -> case x of
+                         "Full"  -> xmobarColor "red" "" x
+                         _       -> pad x
+                    )
                 }
     , handleEventHook = fadeWindowsEventHook
     , workspaces = myWorkspaces
