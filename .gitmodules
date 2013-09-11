@@ -61,3 +61,6 @@
 [submodule "_vim/bundle/vim-powerline"]
 	path = _vim/bundle/vim-powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
+[submodule "_vim/bundle/YouCompleteMe"]
+	path = _vim/bundle/YouCompleteMe
+	url = https://github.com/Valloric/YouCompleteMe.git
