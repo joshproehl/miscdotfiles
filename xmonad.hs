@@ -1,5 +1,6 @@
 import XMonad
 import XMonad.Actions.CycleWS
+import XMonad.Actions.Warp
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.FadeWindows
@@ -7,6 +8,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
+import XMonad.Layout.ResizableTile
 import XMonad.Layout.Grid
 import XMonad.Layout.IM
 import XMonad.Layout.PerWorkspace
@@ -21,7 +23,7 @@ import Data.List
 -- Set up the hook for fadeWindows
 myFadeHook = composeAll
   [ opaque                          -- Default to opaque windows
-    , isFloating --> opacity 0.9
+    , isFloating --> opaque -- opacity 0.9
     , isUnfocused --> opacity 0.65    -- Unfocused is 65% of opaque
     , isDialog --> opaque             -- Dialog windows should go on top
   ]
@@ -42,7 +44,7 @@ myLayoutHook = avoidStruts $
   standardLayouts
   where
     tall = Tall 1 0.02  0.5
-    standardLayouts = tall ||| Mirror tall ||| Full ||| spiral (6/7)
+    standardLayouts = ResizableTall 1 (3/100) (1/2) [] ||| Full ||| spiral (6/7) ||| Mirror tall
     imLayout = withIM (1/5) (Role "buddy_list") Grid --(standardLayouts)
 
 
@@ -63,6 +65,13 @@ addKeys conf@(XConfig {modMask = modm}) =
   , ((modm .|. shiftMask, xK_Left),   shiftToPrev)
   , ((modm,               xK_Down),   nextScreen)
   , ((modm,               xK_Up),     prevScreen)
+
+  -- ResizableTall adjsutments
+  , ((modm,               xK_u), sendMessage MirrorShrink)
+  , ((modm,               xK_k), sendMessage MirrorExpand)
+
+  -- Warp pointer to focused window
+  , ((modm,               xK_apostrophe), warpToWindow (1/2) (1/2))
   ]
 
 main = do
