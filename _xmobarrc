@@ -1,0 +1,26 @@
+Config { position = TopW L 90
+       , bgColor = "black"
+       , fgColor = "grey"
+       , font = "xft:Terminus:medium:size=9:antialias=true:autohint=true"
+       , commands = [ Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Date "%a %b %d %R" "date" 10
+                    , Run BatteryP ["BAT0"]
+                                   ["-t", "<acstatus>:<watts>w (<left>%)"
+                                   ,"-L", "10", "-l", "red"
+                                   ,"-H", "70", "-h", "green", "-n", "yellow", "--"
+                                   ,"-o", "<fc=orange><timeleft></fc>"
+                                   ,"-O", "<fc=purple>CHRG</fc>"
+                                   ] 300
+                    , Run Wireless "wlan0" ["-t", "<essid> (<quality>)"] 300
+                    , Run DynNetwork ["-t", "[<tx>:U <rx>:D]"
+                                     -- ,"-S", "True"
+                                     ] 10
+                    -- , Run Volume "default" "Master" [] 10
+                    , Run StdinReader
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader% }{ %cpu% | %memory% | %wlan0wi% %dynnetwork% | %battery%  |  <fc=#ee9a00>%date%</fc>"
+       , lowerOnStart = True
+       }
