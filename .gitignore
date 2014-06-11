@@ -1,2 +1,7 @@
 _vim/swp/*.swp
 _vim/.netrwhist
+
+_xmonad/*.o
+_xmonad/*.hi
+_xmonad/*.errors
+_xmonad/xmonad*-linux
