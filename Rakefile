@@ -51,8 +51,7 @@ end
 desc "Init and update all git submodules"
 task :submodule_init do
   puts " == Setting up submodules =="
-  `git submodule init`
-  `git submodule update`
+  `git submodule update --init --recursive`
 end
 
 
