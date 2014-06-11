@@ -26,7 +26,7 @@ plugins=(git ruby)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-PATH=$HOME/.bin:$HOME/.rbenv/bin:$HOME/.cabal/bin:~/school/cs333/blitz:$PATH
+PATH=$HOME/.bin:$HOME/.rbenv/bin:$HOME/.cabal/bin:$PATH
 eval "$(rbenv init -)"
 
 bindkey -v
