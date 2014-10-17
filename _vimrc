@@ -54,8 +54,9 @@ set hlsearch
 set incsearch
 set showmatch
 
-" Ctr-P is more useful in mixed mode
-let g:ctrlp_cmd = 'CtrlPMixed'
+" Ctr-P defaults to files search only.
+let g:ctrlp_cmd = 'CtrlP'
+" And ctrl-b makes it easy to search throguh buffers.
 map <c-b> :CtrlPBuffer<cr>
 
 " Add tagbar binding
