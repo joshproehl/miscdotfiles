@@ -39,12 +39,17 @@ myFadeHook = composeAll
 
 -- Manage all of the various floation requirements
 -- and send certain apps to certain places.
-myManageHook = composeAll
-  [ isFullscreen --> doFullFloat
-    -- , className =? "Gimp" --> doFloat
-    , className =? "Pidgin" --> doShift "9:comm"
-    , isDialog --> doCenterFloat
+myManageHook = composeAll . concat $
+  [ [ isFullscreen --> doFullFloat ]
+  , [ isDialog --> doCenterFloat ]
+  , [ className =? "Gimp" --> doFloat ]
+  , [ className =? "Pidgin" --> doShift "9:comm" ]
+  , [ className =? c --> doFloat | c <- myClassFloats ]
+  , [ title =? t --> doFloat | t <- myTitleFloats ]
   ]
+  where
+    myClassFloats = [ "Gimp" ]
+    myTitleFloats = [ "Downloads", "Add-ons", "Firefox Preferences" ]
 
 
 myLayoutHook = avoidStruts $
@@ -91,7 +96,7 @@ addKeys conf@(XConfig {modMask = modm}) =
 
   -- Warp pointer to focused window
   , ((modm,               xK_apostrophe), warpToWindow (1/2) (1/2))
-  
+
   -- Bring up scratchpads
   , ((modm .|. shiftMask, xK_t), namedScratchpadAction scratchpads "terminal")
   , ((modm .|. shiftMask, xK_h), namedScratchpadAction scratchpads "htop")
@@ -100,19 +105,10 @@ addKeys conf@(XConfig {modMask = modm}) =
 
 myStartupHook = do
     setWMName "LG3D" --java hack
-    spawnOnce "xsetroot -curson_name left_ptr &"
-    spawnOnce "nitrogen --restore &"
-    spawnOnce "gtk-redstift -l 45.514747:-122.685874 &"
-    spawnOnce "dropbox start &"
-    spawnOnce "nm-applet &"
-    -- spawnOnce "parcellite &"
-    spawnOnce "trayer --edge top --align right --SetDockType true --SetPartialStrut true --widthtype percent --width 10 --heighttype request --height 19 --transparent true --tint 0x000000 &"
-    spawnOnce "compton &"
 
 main = do
 -- Launch xmobar using the config specificed in it's rc file.
   xmproc <- spawnPipe "/usr/bin/xmobar /home/joshproehl/.xmobarrc"
-  -- spawn xscreensaver -nosplash
 
   xmonad $ withUrgencyHook dzenUrgencyHook { args = ["-bg", "darkgreen", "-xs", "1"] }
          $ defaultConfig
