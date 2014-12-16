@@ -14,4 +14,7 @@ set defsearch=duckduckgo-ssl
 set passkeys=duckduckgo.com:jk<CR>
 set passkeys=duolingo.com:1234<CR>
 
+" Never show the tab bar, it just wastes space
+set showtabline=never
+
 " vim: set ft=pentadactyl:
