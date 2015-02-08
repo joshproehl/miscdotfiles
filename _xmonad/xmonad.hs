@@ -43,7 +43,7 @@ myManageHook = composeAll . concat $
   [ [ isFullscreen --> doFullFloat ]
   , [ isDialog --> doCenterFloat ]
   , [ className =? "Gimp" --> doFloat ]
-  , [ className =? "Pidgin" --> doShift "9:comm" ]
+  , [ className =? "Pidgin" --> doShift "1:comm" ]
   , [ className =? c --> doFloat | c <- myClassFloats ]
   , [ title =? t --> doFloat | t <- myTitleFloats ]
   ]
@@ -54,7 +54,7 @@ myManageHook = composeAll . concat $
 
 myLayoutHook = avoidStruts $
   --onWorkspace "7" gimp $
-  onWorkspace "9:comm" imLayout $
+  onWorkspace "1:comm" imLayout $
   standardLayouts
   where
     tall = Tall 1 0.02  0.5
@@ -65,8 +65,9 @@ myLayoutHook = avoidStruts $
     --       withIM (0.15) (Role "gimp-dock") Full
 
 
+-- Define our workspaces.
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = map show [1..8] ++ ["9:comm"]
+myWorkspaces = ["1:comm"] ++ (map show [2..13])
 
 scratchpads =
   [ NS "terminal" "terminator -T popterm" (title =? "popterm") (customFloating $ W.RationalRect (0/1) (0/1) (1/1) (1/2))
@@ -102,6 +103,15 @@ addKeys conf@(XConfig {modMask = modm}) =
   , ((modm .|. shiftMask, xK_h), namedScratchpadAction scratchpads "htop")
   , ((modm .|. shiftMask, xK_m), namedScratchpadAction scratchpads "alsamxier")
   ]
+  -- mod-[1..9], Switch to workspace N
+  -- mod-shift-[1..9], Move client to workspace N
+  ++
+  [((m .|. modm, k), windows $ f i)
+   | (i, k) <- zip (XMonad.workspaces conf) [xK_1, xK_2, xK_3, xK_4, xK_5, xK_6, xK_7, xK_8, xK_9, xK_0, xK_bracketleft, xK_bracketright, xK_BackSpace]
+   , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]
+  ]
+
+
 
 myStartupHook = do
     setWMName "LG3D" --java hack
@@ -118,7 +128,7 @@ main = do
     , borderWidth = 1
     , normalBorderColor = "#444444"
     , focusedBorderColor = "#005577"
-    , startupHook = myStartupHook --setWMName "LG3D" --java hack
+    , startupHook = myStartupHook
     , manageHook  = manageDocks <+> myManageHook <+> namedScratchpadManageHook scratchpads <+> manageHook defaultConfig
     --, manageHook  = insertPosition Master Newer <+> manageDocks <+> myManageHook <+> manageHook defaultConfig
     , layoutHook  = myLayoutHook
