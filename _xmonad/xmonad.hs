@@ -90,7 +90,7 @@ addKeys conf@(XConfig {modMask = modm}) =
   , ((modm .|. shiftMask, xK_Left),   shiftToPrev)
   , ((modm,               xK_Down),   nextScreen)
   , ((modm,               xK_Up),     prevScreen)
-  , ((modm,               xK_h),      toggleWS)
+  , ((modm,               xK_b),      toggleWS)
 
   -- ResizableTall adjsutments
   , ((modm,               xK_u), sendMessage MirrorShrink)
