@@ -48,7 +48,7 @@ myManageHook = composeAll . concat $
   , [ title =? t --> doFloat | t <- myTitleFloats ]
   ]
   where
-    myClassFloats = [ "Gimp" ]
+    myClassFloats = [ "Gimp", "Octave" ]
     myTitleFloats = [ "Downloads", "Add-ons", "Firefox Preferences" ]
 
 
