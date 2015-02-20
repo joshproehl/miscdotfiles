@@ -80,7 +80,7 @@ delKeys XConfig {modMask = modm} = []
 
 addKeys :: XConfig l -> [((KeyMask, KeySym), X ())]
 addKeys conf@(XConfig {modMask = modm}) =
-  [ ((modm, xK_a), spawn "xmenud") -- Mod-A to open app menu
+  [ ((modm,               xK_a),      spawn "xmenud") -- Mod-A to open app menu
   , ((modm,               xK_p),      spawn "~/.config/dmenu/dmenu-bind.sh")
 
   -- Cycle to workspaces
