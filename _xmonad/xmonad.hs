@@ -86,6 +86,8 @@ addKeys conf@(XConfig {modMask = modm}) =
   -- Cycle to workspaces
   , ((modm,               xK_Right),  nextWS)
   , ((modm,               xK_Left),   prevWS)
+  , ((0,                  0x1008ff26),prevWS)
+  , ((0,                  0x1008ff27),nextWS)
   , ((modm .|. shiftMask, xK_Right),  shiftToNext)
   , ((modm .|. shiftMask, xK_Left),   shiftToPrev)
   , ((modm,               xK_Down),   nextScreen)
