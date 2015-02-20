@@ -2,3 +2,5 @@
 clear Lock
 keysym Caps_Lock = Control_L
 add Control = Control_L
+!! Make the menu key another "windows" key
+keysym Menu = Super_L
