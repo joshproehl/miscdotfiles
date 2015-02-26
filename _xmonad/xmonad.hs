@@ -14,8 +14,8 @@ import XMonad.Layout.IM
 import XMonad.Layout.PerWorkspace
 import XMonad.Layout.Reflect
 import XMonad.Layout.Spacing
-import XMonad.Layout.Drawer -- TODO: Config
--- import XMonad.Layout.Spiral
+-- import XMonad.Layout.Drawer -- Leaving to remember it exists in the future.
+-- import XMonad.Layout.Spiral -- Leaving to remember it exists in the future.
 import qualified XMonad.StackSet as W -- Prevent conflict of .workspaces
 import XMonad.Util.CustomKeys
 import XMonad.Util.NamedScratchpad
@@ -26,14 +26,14 @@ import Data.List
 
 
 
--- TODO: Create workspace on the fly form Gimp
+-- TODO: Create workspace on the fly for Gimp?
 
 -- Set up the hook for fadeWindows
 myFadeHook = composeAll
   [ opaque                          -- Default to opaque windows
-    , isFloating --> opaque -- opacity 0.9
-    , isUnfocused --> opacity 0.65    -- Unfocused is 65% of opaque
-    , isDialog --> opaque             -- Dialog windows should go on top
+  , isFloating --> opaque           -- opacity 0.9
+  , isUnfocused --> opacity 0.65    -- Unfocused is 65% of opaque
+  , isDialog --> opaque             -- Dialog windows should go on top
   ]
 
 
@@ -70,9 +70,9 @@ myWorkspaces :: [WorkspaceId]
 myWorkspaces = ["1:comm"] ++ (map show [2..13])
 
 scratchpads =
-  [ NS "terminal" "terminator -T popterm" (title =? "popterm") (customFloating $ W.RationalRect (0/1) (0/1) (1/1) (1/2))
-  , NS "htop" "urxvt -e htop" (title =? "htop") (customFloating $ W.RationalRect (0/1) (0/1) (1/1) (1/2))
-  , NS "alsamxier" "urxvt -e alsamixer" (title =? "alsamixer") (customFloating $ W.RationalRect (0/1) (0/1) (1/1) (1/2))
+  [ NS "terminal" "terminator -T popterm" (title =? "popterm")   (customFloating $ W.RationalRect (0/1) (0/1) (1/1) (1/2))
+  , NS "htop" "urxvt -e htop"             (title =? "htop")      (customFloating $ W.RationalRect (0/1) (0/1) (1/1) (1/2))
+  , NS "alsamxier" "urxvt -e alsamixer"   (title =? "alsamixer") (customFloating $ W.RationalRect (0/1) (0/1) (1/1) (1/2))
   ] where role = stringProperty "WM_WINDOW_ROLE"
 
 delKeys :: XConfig l -> [(KeyMask, KeySym)]
@@ -109,8 +109,8 @@ addKeys conf@(XConfig {modMask = modm}) =
   , ((modm .|. shiftMask, xK_h), namedScratchpadAction scratchpads "htop")
   , ((modm .|. shiftMask, xK_m), namedScratchpadAction scratchpads "alsamxier")
   ]
-  -- mod-[1..9], Switch to workspace N
-  -- mod-shift-[1..9], Move client to workspace N
+  -- mod-[1..{BACKSPACE}], Switch to workspace N
+  -- mod-shift-[1..{BACKSPACE}], Move client to workspace N
   ++
   [((m .|. modm, k), windows $ f i)
    | (i, k) <- zip (XMonad.workspaces conf) [xK_1, xK_2, xK_3, xK_4, xK_5, xK_6, xK_7, xK_8, xK_9, xK_0, xK_bracketleft, xK_bracketright, xK_BackSpace]
@@ -122,9 +122,9 @@ addKeys conf@(XConfig {modMask = modm}) =
 myStartupHook = do
     setWMName "LG3D" --java hack
 
+
 main = do
--- Launch xmobar using the config specificed in it's rc file.
-  xmproc <- spawnPipe "/usr/bin/xmobar /home/joshproehl/.xmobarrc"
+  xmproc <- spawnPipe "/usr/bin/xmobar /home/joshproehl/.xmobarrc" -- Launch xmobar using the config specificed in it's rc file.
 
   xmonad $ withUrgencyHook dzenUrgencyHook { args = ["-bg", "darkgreen", "-xs", "1"] }
          $ defaultConfig
