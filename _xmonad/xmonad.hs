@@ -44,6 +44,7 @@ myManageHook = composeAll . concat $
   , [ isDialog --> doCenterFloat ]
   , [ className =? "Gimp" --> doFloat ]
   , [ className =? "Pidgin" --> doShift "1:comm" ]
+  , [ className =? "Quasselclient" --> doShift "1:comm" ]
   , [ className =? c --> doFloat | c <- myClassFloats ]
   , [ title =? t --> doFloat | t <- myTitleFloats ]
   ]
