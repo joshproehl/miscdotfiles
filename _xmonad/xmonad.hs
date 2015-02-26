@@ -101,6 +101,9 @@ addKeys conf@(XConfig {modMask = modm}) =
   -- Warp pointer to focused window
   , ((modm,               xK_apostrophe), warpToWindow (1/2) (1/2))
 
+  -- Fn-F2 (XF86ScreenSaver) locks machine
+  ,((0,                   0x1008ff2d),spawn "xscreensaver-command --lock")
+
   -- Bring up scratchpads
   , ((modm .|. shiftMask, xK_t), namedScratchpadAction scratchpads "terminal")
   , ((modm .|. shiftMask, xK_h), namedScratchpadAction scratchpads "htop")
