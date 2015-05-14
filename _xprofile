@@ -7,3 +7,4 @@ dropbox start &
 nm-applet &
 copyq &
 xscreensaver -nosplash &
+caffeine &
