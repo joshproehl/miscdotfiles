@@ -70,11 +70,13 @@ myLayoutHook = avoidStruts $
 myWorkspaces :: [WorkspaceId]
 myWorkspaces = ["1:comm"] ++ (map show [2..13])
 
+-- RationalRect params are: left,top,width,height
 scratchpads =
-  [ NS "terminal" "terminator -T popterm" (title =? "popterm")   (customFloating $ W.RationalRect (0/1) (0/1) (1/1) (1/2))
-  , NS "htop" "urxvt -e htop"             (title =? "htop")      (customFloating $ W.RationalRect (0/1) (0/1) (1/1) (1/2))
-  , NS "alsamxier" "urxvt -e alsamixer"   (title =? "alsamixer") (customFloating $ W.RationalRect (0/1) (0/1) (1/1) (1/2))
+  [ NS "terminal" "urxvt -e popterm"           (title =? "popterm")   (customFloating $ W.RationalRect 0 0.025 1 0.57)
+  , NS "htop" "urxvt -e htop"                  (title =? "htop")      (customFloating $ W.RationalRect (0/1) (0/1) (1/1) (1/2))
+  , NS "alsamxier" "urxvt -e alsamixer"        (title =? "alsamixer") (customFloating $ W.RationalRect (0/1) (0/1) (1/1) (1/2))
   ] where role = stringProperty "WM_WINDOW_ROLE"
+
 
 delKeys :: XConfig l -> [(KeyMask, KeySym)]
 delKeys XConfig {modMask = modm} = []
