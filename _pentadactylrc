@@ -10,7 +10,7 @@ hi HintElem background-color: rgba(255, 255, 153, 1);
 set hintkeys=aoeuidhtnskxbmyfgc34567
 
 " Set up passkeys for various sites
-set defsearch=duckduckgo-ssl
+set defsearch=duckduckgo
 set passkeys=duckduckgo.com:jk<CR>
 set passkeys=duolingo.com:1234<CR>
 
