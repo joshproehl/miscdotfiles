@@ -18,7 +18,8 @@ inoremap <Up> <NOP>
 inoremap <Down> <NOP>
 
 " Set color and make GUI and Terminal look different
-colorscheme solarized
+"colorscheme solarized
+colorscheme base16-default
 if has('gui_running')
     set background=light
 else
