@@ -37,3 +37,8 @@ alias gpoh="git push origin HEAD"
 alias be="bundle exec"
 alias t="task"
 alias tw="task"
+
+# Aliases for taskwarrior. Note the space to prevent them from going into history.
+alias t=" task"
+alias tw=" task"
+alias task=" task"
