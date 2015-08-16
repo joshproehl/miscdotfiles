@@ -39,5 +39,5 @@ From AUR
 * dropbox
 * yeganesh
 * python2-deepin-ui
-* caffeine-ng
+* caffeine-ng-git (Switched to -git because regular version eats all your ram.)
 
