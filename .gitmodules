@@ -73,3 +73,6 @@
 [submodule "_vim/bundle/vim-taskwarrior"]
 	path = _vim/bundle/vim-taskwarrior
 	url = https://github.com/farseer90718/vim-taskwarrior
+[submodule "_vim/bundle/vim-go"]
+	path = _vim/bundle/vim-go
+	url = https://github.com/fatih/vim-go.git
