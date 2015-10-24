@@ -25,3 +25,7 @@ For more on my stuff, please visit:
 
 http://skinwalker.wordpress.com
                          
+
+ARCH LINUX INSTALL:
+cp dweep.pcf to either /usr/share/fonts/ for system-wide, or ~/.local/share/fonts/ for single-user.
+fc-cache -vf

@@ -41,3 +41,5 @@ From AUR
 * python2-deepin-ui
 * caffeine-ng-git (Switched to -git because regular version eats all your ram.)
 
+## TODO:
+* Script to bootsrap the manual-install fonts?
