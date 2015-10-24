@@ -1,7 +1,7 @@
 import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.Warp
-import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.DynamicLog hiding (xmobar, xmobarPP, xmobarColor, sjanssenPP, byorgeyPP)
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.FadeWindows
 import XMonad.Hooks.ManageDocks
@@ -85,6 +85,7 @@ addKeys :: XConfig l -> [((KeyMask, KeySym), X ())]
 addKeys conf@(XConfig {modMask = modm}) =
   [ ((modm,               xK_a),      spawn "xmenud") -- Mod-A to open app menu
   , ((modm,               xK_p),      spawn "~/.miscdotfiles/scripts/launch_dmenu_yeganesh.sh")
+  , ((modm,               xK_q),      spawn "killall dzen2; killall conky; xmonad --restart")
 
   -- Cycle to workspaces
   , ((modm,               xK_Right),  nextWS)
@@ -125,9 +126,35 @@ addKeys conf@(XConfig {modMask = modm}) =
 myStartupHook = do
     setWMName "LG3D" --java hack
 
+myLogHook h = dynamicLogWithPP ( defaultPP
+  {
+      ppCurrent         = dzenColor color15 background .  pad
+    , ppVisible         = dzenColor color14 background .  pad
+    , ppHidden          = dzenColor color14 background .  pad
+    , ppHiddenNoWindows = dzenColor background background . pad
+    , ppWsSep           = ""
+    , ppSep             = "    "
+    , ppLayout          = wrap "^ca(1,xdotool key alt+space)" "^ca()" . dzenColor color2 background .
+                          (\x -> case x of
+                            "Full"                    ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_full.xbm)"
+                            "Spacing 5 ResizableTall" ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_tall.xbm)"
+                            "ResizableTall"           ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_tall.xbm)"
+                            "SimplestFloat"           ->  "^i(/home/joshproehl/.xmonad/dzen2/mouse_01.xbm)"
+                            "Circle"                  ->  "^i(/home/joshproehl/.xmonad/dzen2/full.xbm)"
+                            _                         ->  "^i(/home/joshproehl/.xmonad/dzen2/grid.xbm)"
+                          )
+    --    , ppTitle =  wrap "^ca(1,xdotool key alt+shift+x)^fg(#D23D3D)^fn(fkp)x ^fn()" "^ca()" . dzenColor foreground background . shorten 40 . pad
+          , ppTitle =  wrap "^ca(1,xdotool key alt+shift+x)" "^ca()" . dzenColor color15 background . shorten 40 . pad
+          , ppOrder =  \(ws:l:t:_) -> [ws,l, t]
+          , ppOutput  =   hPutStrLn h
+  } )
+
+myXmonadBar = "dzen2 -x '0' -y '0' -h "++ show(statusbarHeight) ++" -w "++show(xmonadStatusWidth)++" -ta 'l' -fg '"++foreground++"' -bg '"++background++"' -fn "++myFont
+myStatusBar = "/home/joshproehl/.xmonad/right_status_bar '"++foreground++"' '"++background++"' "++myFont ++ " " ++ xmonadStatusWidth ++ " " ++ statusbarHeight
 
 main = do
-  xmproc <- spawnPipe "/usr/bin/xmobar /home/joshproehl/.xmobarrc" -- Launch xmobar using the config specificed in it's rc file.
+  dzenLeftBar   <- spawnPipe myXmonadBar
+  dzenRightBar  <- spawnPipe myStatusBar
 
   xmonad $ withUrgencyHook dzenUrgencyHook { args = ["-bg", "darkgreen", "-xs", "1"] }
          $ defaultConfig
@@ -141,16 +168,43 @@ main = do
     , manageHook  = manageDocks <+> myManageHook <+> namedScratchpadManageHook scratchpads <+> manageHook defaultConfig
     --, manageHook  = insertPosition Master Newer <+> manageDocks <+> myManageHook <+> manageHook defaultConfig
     , layoutHook  = myLayoutHook
-    , logHook = fadeWindowsLogHook myFadeHook <+> dynamicLogWithPP xmobarPP
-                { ppOutput = hPutStrLn xmproc
-                , ppTitle  = xmobarColor "green"  "" . shorten 50
-                , ppSep    = " | "
-                , ppLayout = (\ x -> case x of
-                                         "Full"  -> xmobarColor "red" "" x
-                                         _       -> pad x
-                             )
-                , ppSort   = fmap (namedScratchpadFilterOutWorkspace .) (ppSort defaultPP)
-                }
+    , logHook     = myLogHook dzenLeftBar
+    --, logHook = fadeWindowsLogHook myFadeHook <+> dynamicLogWithPP xmobarPP
+    --            { ppOutput = hPutStrLn xmproc
+    --            , ppTitle  = xmobarColor "green"  "" . shorten 50
+    --            , ppSep    = " | "
+    --            , ppLayout = (\ x -> case x of
+    --                                     "Full"  -> xmobarColor "red" "" x
+    --                                     _       -> pad x
+    --                         )
+    --            , ppSort   = fmap (namedScratchpadFilterOutWorkspace .) (ppSort defaultPP)
+    --            }
     , handleEventHook = fadeWindowsEventHook
     , workspaces      = myWorkspaces
     }
+
+
+xmonadStatusWidth = "500"
+statusbarHeight = "14"
+
+-- EROSION EDIT
+myFont		= "-*-terminus-medium-*-normal-*-9-*-*-*-*-*-*-*"
+--myFont		= "-*-nu-*-*-*-*-*-*-*-*-*-*-*-*"
+background= "#181512"
+foreground= "#D6C3B6"
+color0=  "#332d29"
+color8=  "#817267"
+color1=  "#8c644c"
+color9=  "#9f7155"
+color2=  "#746C48"
+color10= "#9f7155"
+color3=  "#bfba92"
+color11= "#E0DAAC"
+color4=  "#646a6d"
+color12= "#777E82"
+color5=  "#766782"
+color13= "#897796"
+color6=  "#4B5C5E"
+color14= "#556D70"
+color7=  "#504339"
+color15= "#9a875f"
