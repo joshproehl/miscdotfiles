@@ -1,7 +1,7 @@
 #!/bin/bash
 source $(dirname $0)/config.sh
 XPOS=$((1030 + $XOFFSET))
-WIDTH="180"
+WIDTH="200"
 LINES="8"
 
 essid=$(iwconfig wlan0 | sed -n "1p" | awk -F '"' '{print $2}')
