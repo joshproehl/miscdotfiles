@@ -1,7 +1,7 @@
 xsetroot -cursor_name left_ptr &
 nitrogen --restore &
 compton &
-trayer --edge top --align right --SetDockType true --SetPartialStrut true --widthtype percent --width 10 --heighttype request --height 19 --transparent true --tint 0x000000 --monitor primary &
+# trayer --edge top --align right --SetDockType true --SetPartialStrut true --widthtype percent --width 10 --heighttype request --height 19 --transparent true --tint 0x000000 --monitor primary &
 redshift-gtk -l 45.514747:-122.685874 &
 dropbox start &
 nm-applet &
