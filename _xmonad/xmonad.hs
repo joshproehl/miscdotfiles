@@ -149,8 +149,8 @@ myLogHook h = dynamicLogWithPP ( defaultPP
           , ppOutput  =   hPutStrLn h
   } )
 
-myXmonadBar = "dzen2 -x '0' -y '0' -h "++ show(statusbarHeight) ++" -w "++show(xmonadStatusWidth)++" -ta 'l' -fg '"++foreground++"' -bg '"++background++"' -fn "++myFont
-myStatusBar = "/home/joshproehl/.xmonad/right_status_bar '"++foreground++"' '"++background++"' "++myFont ++ " " ++ xmonadStatusWidth ++ " " ++ statusbarHeight
+myXmonadBar = "/home/joshproehl/.xmonad/bar_left_xmonad '"++foreground++"' '"++background++"' "++myFont ++ " " ++ xmonadStatusWidth ++ " " ++ statusbarHeight
+myStatusBar = "/home/joshproehl/.xmonad/bar_right_status '"++foreground++"' '"++background++"' "++myFont ++ " " ++ xmonadStatusWidth ++ " " ++ statusbarHeight
 
 main = do
   dzenLeftBar   <- spawnPipe myXmonadBar

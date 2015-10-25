@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# This file describes the left status bar, which shows the output from the pretty-print log output in xmonad
+
+# Grab the variables passed in from calling this
+foreground=$1
+background=$2
+font=$3
+xmonadStatusWidth=$4
+statusBarHeight=$5
+
+
+#host=$(hostname)
+#xWidth=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1)
+#Yaxis=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2)
+
+
+dzen2 -x '0' -y '0' -w $xmonadStatusWidth -h $statusBarHeight -ta 'l' -bg $background -fg $foreground -fn $font -e 'button3='
