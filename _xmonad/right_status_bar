@@ -18,7 +18,7 @@ xWidth=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1)
 
 statusWidth=xWidth-xmonadStatusWidth-trayerWidth
 
-conky -qc $HOME/.xmonad/conky_dzen | dzen2 -x $xmonadStatusWidth -w $statusWidth -h $statusBarHeight -ta 'r' -bg $background -fg $foreground -y '0' -fn $font -dock &
+conky -qc $HOME/.xmonad/conky_dzen | dzen2 -x $xmonadStatusWidth -w $statusWidth -h $statusBarHeight -ta 'r' -bg $background -fg $foreground -y '0' -fn $font -e 'button3=' -dock &
 
 # Check to see if external is connected
 #if [[ -z `xrandr | grep " connected" | grep 'VGA'` ]]; then
