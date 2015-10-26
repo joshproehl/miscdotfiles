@@ -13,8 +13,8 @@ if [[ -z `xrandr | grep " connected" | grep 'VGA'` ]]; then
 fi
 
 #FONT="-artwiz-lime-medium-r-normal-*-10-110-75-75-m-50-iso8859-*"
-FONT="-*-terminus-medium-*-normal-*-9-*-*-*-*-*-*-*"
-#FONT="-*-dweep-medium-r-semicondensed-*-11-*-*-*-*-*-*-*"
+#FONT="-*-terminus-medium-*-normal-*-9-*-*-*-*-*-*-*"
+FONT="-*-dweep-medium-r-semicondensed-*-11-*-*-*-*-*-*-*"
 #FONT="-artwiz-limey-medium-r-normal-*-10-110-75-75-m-50-iso8859-*"
 #FONT="-*-tamsyn-medium-r-normal-*-10-110-75-75-m-50-iso8859-*"
 #FONT='-*-lemon-*-*-*-*-*-*-75-75-*-*-*-*'

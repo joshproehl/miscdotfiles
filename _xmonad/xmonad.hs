@@ -188,8 +188,8 @@ xmonadStatusWidth = "500"
 statusbarHeight = "14"
 
 -- EROSION EDIT
-myFont		= "-*-terminus-medium-*-normal-*-9-*-*-*-*-*-*-*"
---myFont		= "-*-nu-*-*-*-*-*-*-*-*-*-*-*-*"
+--myFont		= "-*-terminus-medium-*-normal-*-9-*-*-*-*-*-*-*"
+myFont		= "-*-nu-*-*-*-*-*-*-*-*-*-*-*-*"
 background= "#181512"
 foreground= "#D6C3B6"
 color0=  "#332d29"

@@ -45,3 +45,4 @@ From AUR
 
 ## TODO:
 * Script to bootsrap the manual-install fonts?
+* Dweep font requires changing arch configs in /etc/font/conf.d/ to allow bitmap fonts
