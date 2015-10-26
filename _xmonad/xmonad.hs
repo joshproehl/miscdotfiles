@@ -128,14 +128,15 @@ myStartupHook = do
 
 myLogHook h = dynamicLogWithPP ( defaultPP
   {
-      ppCurrent         = dzenColor color15 background .  pad
-    , ppVisible         = dzenColor color14 background .  pad
-    , ppHidden          = dzenColor color14 background .  pad
-    , ppHiddenNoWindows = dzenColor background background . pad
-    , ppWsSep           = ""
-    , ppSep             = "    "
+      ppCurrent         = dzenColor color15 background
+    , ppVisible         = dzenColor color14 background
+    , ppHidden          = dzenColor color14 background
+    , ppHiddenNoWindows = dzenColor background background
+    , ppWsSep           = " "
+    , ppSep             = "  "
     , ppLayout          = wrap "^ca(1,xdotool key alt+space)" "^ca()" . dzenColor color2 background .
                           (\x -> case x of
+                            -- TODO: Figure out why neither $HOME nor ~ work here and fix it.
                             "Full"                    ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_full.xbm)"
                             "Spacing 5 ResizableTall" ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_tall.xbm)"
                             "ResizableTall"           ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_tall.xbm)"
@@ -143,14 +144,14 @@ myLogHook h = dynamicLogWithPP ( defaultPP
                             "Circle"                  ->  "^i(/home/joshproehl/.xmonad/dzen2/full.xbm)"
                             _                         ->  "^i(/home/joshproehl/.xmonad/dzen2/grid.xbm)"
                           )
-    --    , ppTitle =  wrap "^ca(1,xdotool key alt+shift+x)^fg(#D23D3D)^fn(fkp)x ^fn()" "^ca()" . dzenColor foreground background . shorten 40 . pad
-          , ppTitle =  wrap "^ca(1,xdotool key alt+shift+x)" "^ca()" . dzenColor color15 background . shorten 40 . pad
-          , ppOrder =  \(ws:l:t:_) -> [ws,l, t]
-          , ppOutput  =   hPutStrLn h
+    , ppTitle           = wrap "^ca(1,xdotool key alt+shift+x)" "^ca()" . dzenColor color15 background . shorten 50 . pad
+    , ppOrder           = \(ws:l:t:_) -> [ws,l, t]
+    , ppOutput          = hPutStrLn h
+--    , ppSort            = fmap (namedScratchpadFilterOutWorkspace .) (ppSort defaultPP) 
   } )
 
-myXmonadBar = "/home/joshproehl/.xmonad/bar_left_xmonad '"++foreground++"' '"++background++"' "++myFont ++ " " ++ xmonadStatusWidth ++ " " ++ statusbarHeight
-myStatusBar = "/home/joshproehl/.xmonad/bar_right_status '"++foreground++"' '"++background++"' "++myFont ++ " " ++ xmonadStatusWidth ++ " " ++ statusbarHeight
+myXmonadBar = "~/.xmonad/bar_left_xmonad '"++foreground++"' '"++background++"' "++myFont ++ " " ++ xmonadStatusWidth ++ " " ++ statusbarHeight
+myStatusBar = "~/.xmonad/bar_right_status '"++foreground++"' '"++background++"' "++myFont ++ " " ++ xmonadStatusWidth ++ " " ++ statusbarHeight
 
 main = do
   dzenLeftBar   <- spawnPipe myXmonadBar
@@ -169,27 +170,18 @@ main = do
     --, manageHook  = insertPosition Master Newer <+> manageDocks <+> myManageHook <+> manageHook defaultConfig
     , layoutHook  = myLayoutHook
     , logHook     = myLogHook dzenLeftBar
-    --, logHook = fadeWindowsLogHook myFadeHook <+> dynamicLogWithPP xmobarPP
-    --            { ppOutput = hPutStrLn xmproc
-    --            , ppTitle  = xmobarColor "green"  "" . shorten 50
-    --            , ppSep    = " | "
-    --            , ppLayout = (\ x -> case x of
-    --                                     "Full"  -> xmobarColor "red" "" x
-    --                                     _       -> pad x
-    --                         )
-    --            , ppSort   = fmap (namedScratchpadFilterOutWorkspace .) (ppSort defaultPP)
-    --            }
     , handleEventHook = fadeWindowsEventHook
     , workspaces      = myWorkspaces
     }
 
 
-xmonadStatusWidth = "500"
+
+xmonadStatusWidth = "600"
 statusbarHeight = "14"
 
 -- EROSION EDIT
---myFont		= "-*-terminus-medium-*-normal-*-9-*-*-*-*-*-*-*"
-myFont		= "-*-nu-*-*-*-*-*-*-*-*-*-*-*-*"
+myFont		= "-*-terminus-medium-*-normal-*-10-*-*-*-*-*-*-*"
+--myFont		= "-*-nu-*-*-*-*-*-*-*-*-*-*-*-*-*"
 background= "#181512"
 foreground= "#D6C3B6"
 color0=  "#332d29"
