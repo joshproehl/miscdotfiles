@@ -8,8 +8,8 @@ cputemp="^fg($white0)^i($HOME/.xmonad/dzen2/temp.xbm)^fg() Temp ^fg($highlight)$
 cpuutiluser=$(iostat -c | sed -n "4p" | awk -F " " '{print $1}')
 cpuutilsystem=$(iostat -c | sed -n "4p" | awk -F " " '{print $3}')
 cpuutilidle=$(iostat -c | sed -n "4p" | awk -F " " '{print $6}')
-ramtotal=$(free -m | sed -n "3p" | awk -F " " '{print $4}')
-ramused=$(free -m | sed -n "3p" | awk -F " " '{print $3}')
+ramtotal=$(free -m | sed -n "2p" | awk -F " " '{print $2}')
+ramused=$(free -m | sed -n "2p" | awk -F " " '{print $3}')
 
 kernel="^fg($white0)^i($HOME/.xmonad/dzen2/arch_10x10.xbm)^fg() Kernel ^fg($highlight)$(uname -r)"
 packages="^fg($white0)^i($HOME/.xmonad/dzen2/pacman.xbm)^fg() Packages ^fg($highlight)$(pacman -Q | wc -l)"
