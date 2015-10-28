@@ -2,18 +2,19 @@
 source $(dirname $0)/config.sh
 XPOS=$((1080 + $XOFFSET))
 WIDTH="260"
-LINES="15"
+LINES="16"
 
 cputemp="^fg($white0)^i($HOME/.xmonad/dzen2/temp.xbm)^fg() Temp ^fg($highlight)$(sensors | grep "temp1" | cut -d'+' -f2 | head -c2)F"
-cpuutiluser=$(iostat -c | sed -n "4p" | awk -F " " '{print $1}')
-cpuutilsystem=$(iostat -c | sed -n "4p" | awk -F " " '{print $3}')
-cpuutilidle=$(iostat -c | sed -n "4p" | awk -F " " '{print $6}')
+#cpuutiluser=$(iostat -c | sed -n "4p" | awk -F " " '{print $1}')
+#cpuutilsystem=$(iostat -c | sed -n "4p" | awk -F " " '{print $3}')
+#cpuutilidle=$(iostat -c | sed -n "4p" | awk -F " " '{print $6}')
 ramtotal=$(free -m | sed -n "2p" | awk -F " " '{print $2}')
 ramused=$(free -m | sed -n "2p" | awk -F " " '{print $3}')
 
 kernel="^fg($white0)^i($HOME/.xmonad/dzen2/arch_10x10.xbm)^fg() Kernel ^fg($highlight)$(uname -r)"
 packages="^fg($white0)^i($HOME/.xmonad/dzen2/pacman.xbm)^fg() Packages ^fg($highlight)$(pacman -Q | wc -l)"
 uptime="^fg($white0)^i($HOME/.xmonad/dzen2/net_up_01.xbm)^fg() Uptime ^fg($highlight)$(uptime | awk '{gsub(/,/,""); print $3}')"
+loadavg="^fg($highlight)$(uptime | awk '{match($0, /(load average:.*$)/, r)}END{print r[0]}')"
 
 hddtitle=$(df -h | head -1)
 hddtotal=$(df -h --total | tail -1)
@@ -31,4 +32,4 @@ mem_bar=`$HOME/.xmonad/scripts/bar_ram_lg.sh`
 sda_bar=`$HOME/.xmonad/scripts/bar_disk.sh /dev/sda`
 sdb_bar=`$HOME/.xmonad/scripts/bar_disk.sh /dev/sdb`
 
-(echo " ^fg($highlight)System"; echo "              $kernel"; echo "        $packages   $uptime"; echo " "; echo " $cpu_bar_0"; echo " $cpu_bar_1"; echo " $cpu_bar_2"; echo " $cpu_bar_3"; echo "                 $cputemp"; echo " ";  echo " $mem_bar"; echo "                 ^fg($highlight)$ramused MB / $ramtotal MB"; echo " "; echo " $sda_bar"; echo " $sdb_bar"; sleep 10) | dzen2 -fg $foreground -bg  $background -fn $FONT -x $XPOS -y $YPOS -w $WIDTH -l $LINES -e 'onstart=uncollapse,hide;button1=exit;button3=exit'
+(echo " ^fg($highlight)System"; echo "              $kernel"; echo "        $packages   $uptime"; echo " "; echo " $cpu_bar_0"; echo " $cpu_bar_1"; echo " $cpu_bar_2"; echo " $cpu_bar_3"; echo "           $loadavg"; echo "                 $cputemp"; echo " ";  echo " $mem_bar"; echo "                 ^fg($highlight)$ramused MB / $ramtotal MB"; echo " "; echo " $sda_bar"; echo " $sdb_bar"; sleep 10) | dzen2 -fg $foreground -bg  $background -fn $FONT -x $XPOS -y $YPOS -w $WIDTH -l $LINES -e 'onstart=uncollapse,hide;button1=exit;button3=exit'
