@@ -12,7 +12,6 @@ statusBarHeight=$5
 
 
 #host=$(hostname)
-trayerWidth=100 # This needs to be set to match whatever trayer's width is from it's launch command in .xprofile
 xWidth=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1)
 #Yaxis=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2)
 
