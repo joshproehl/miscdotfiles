@@ -2,6 +2,7 @@ import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.Warp
 import XMonad.Hooks.DynamicLog hiding (xmobar, xmobarPP, xmobarColor, sjanssenPP, byorgeyPP)
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.FadeWindows
 import XMonad.Hooks.ManageDocks
@@ -132,6 +133,7 @@ myLogHook h = dynamicLogWithPP ( defaultPP
     , ppVisible         = dzenColor color14 background
     , ppHidden          = dzenColor color14 background
     , ppHiddenNoWindows = dzenColor background background
+    , ppUrgent          = dzenColor "red" background . wrap ">" "<" . dzenStrip
     , ppWsSep           = " "
     , ppSep             = "  "
     , ppLayout          = wrap "^ca(1,xdotool key alt+space)" "^ca()" . dzenColor color2 background .
@@ -158,7 +160,7 @@ main = do
   dzenRightBar  <- spawnPipe myStatusBar
 
   xmonad $ withUrgencyHook dzenUrgencyHook { args = ["-bg", "darkgreen", "-xs", "1"] }
-         $ defaultConfig
+         $ ewmh defaultConfig
     { terminal    = "terminator"
     , modMask     = mod4Mask  -- Use the "windows" key as the mod key.
     , keys        = customKeys delKeys addKeys
