@@ -31,6 +31,8 @@ Regular packages
 * redshift
 * terminus-font
 * ttf-dejavu, ttf-droid, ttf-anonymous-pro
+* dzen2
+* conky
 * sysstat (System status used by dzen-conky)
 * bc (Command line calculator used by dzen/conky)
 
