@@ -19,12 +19,13 @@ inoremap <Down> <NOP>
 
 " Set color and make GUI and Terminal look different
 "colorscheme solarized
-colorscheme base16-default
-if has('gui_running')
-    set background=light
-else
-    set background=dark
-endif
+"colorscheme base16-default
+colorscheme monokai
+"if has('gui_running')
+"    set background=light
+"else
+"    set background=dark
+"endif
 
 " Save on focus lost
 au FocusLost * :wa
