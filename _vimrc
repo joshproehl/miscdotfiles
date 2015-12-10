@@ -33,6 +33,7 @@ au FocusLost * :wa
 " The basics:
 set encoding=utf-8
 set laststatus=2
+set number
 set relativenumber
 syntax on
 filetype plugin on
