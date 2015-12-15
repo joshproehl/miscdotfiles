@@ -88,3 +88,6 @@
 [submodule "_vim/bundle/neoyank"]
 	path = _vim/bundle/neoyank
 	url = https://github.com/Shougo/neoyank.vim.git
+[submodule "_vim/bundle/vimproc"]
+	path = _vim/bundle/vimproc
+	url = https://github.com/Shougo/vimproc.vim.git
