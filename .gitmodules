@@ -91,3 +91,6 @@
 [submodule "_vim/bundle/vimproc"]
 	path = _vim/bundle/vimproc
 	url = https://github.com/Shougo/vimproc.vim.git
+[submodule "_vim/bundle/neomru"]
+	path = _vim/bundle/neomru
+	url = https://github.com/Shougo/neomru.vim.git
