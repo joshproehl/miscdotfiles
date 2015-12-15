@@ -97,6 +97,7 @@ let g:gitgutter_highlight_lines = 0
 let g:gitgutter_realtime        = 1
 let g:gitgutter_eager           = 1
 
+nnoremap <Leader>gt :!tig<CR>:redraw!<CR>
 
 " ====================================================
 " Configure Unite plugin
@@ -130,31 +131,31 @@ let g:unite_source_menu_menus.git = {
         \                            ⌘ [space]g',
     \}
 let g:unite_source_menu_menus.git.command_candidates = [
-    \['▷ tig                                                        ⌘ ,gt',
-        \'normal ,gt'],
-    \['▷ git status       (Fugitive)                                ⌘ ,gs',
+    \['▷ tig                                                        ⌘ ;gt',
+        \'normal ;gt'],
+    \['▷ git status       (Fugitive)                                ⌘ ;gs',
         \'Gstatus'],
-    \['▷ git diff         (Fugitive)                                ⌘ ,gd',
+    \['▷ git diff         (Fugitive)                                ⌘ ;gd',
         \'Gdiff'],
-    \['▷ git commit       (Fugitive)                                ⌘ ,gc',
+    \['▷ git commit       (Fugitive)                                ⌘ ;gc',
         \'Gcommit'],
-    \['▷ git log          (Fugitive)                                ⌘ ,gl',
+    \['▷ git log          (Fugitive)                                ⌘ ;gl',
         \'exe "silent Glog | Unite quickfix"'],
-    \['▷ git blame        (Fugitive)                                ⌘ ,gb',
+    \['▷ git blame        (Fugitive)                                ⌘ ;gb',
         \'Gblame'],
-    \['▷ git stage        (Fugitive)                                ⌘ ,gw',
+    \['▷ git stage        (Fugitive)                                ⌘ ;gw',
         \'Gwrite'],
-    \['▷ git checkout     (Fugitive)                                ⌘ ,go',
+    \['▷ git checkout     (Fugitive)                                ⌘ ;go',
         \'Gread'],
-    \['▷ git rm           (Fugitive)                                ⌘ ,gr',
+    \['▷ git rm           (Fugitive)                                ⌘ ;gr',
         \'Gremove'],
-    \['▷ git mv           (Fugitive)                                ⌘ ,gm',
+    \['▷ git mv           (Fugitive)                                ⌘ ;gm',
         \'exe "Gmove " input("destination: ")'],
-    \['▷ git push         (Fugitive, output buffer)             ⌘ ,gp',
+    \['▷ git push         (Fugitive, output buffer)                 ⌘ ;gp',
         \'Git! push'],
-    \['▷ git pull         (Fugitive, output buffer)             ⌘ ,gP',
+    \['▷ git pull         (Fugitive, output buffer)                 ⌘ ;gP',
         \'Git! pull'],
-    \['▷ git prompt       (Fugitive, output buffer)             ⌘ ,gi',
+    \['▷ git prompt       (Fugitive, output buffer)                 ⌘ ;gi',
         \'exe "Git! " input("git: ")'],
     \['▷ git cd           (Fugitive)',
         \'Gcd'],
