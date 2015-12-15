@@ -79,3 +79,6 @@
 [submodule "_vim/bundle/nerdtree-git-plugin"]
 	path = _vim/bundle/nerdtree-git-plugin
 	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
+[submodule "_vim/bundle/unite"]
+	path = _vim/bundle/unite
+	url = https://github.com/Shougo/unite.vim.git

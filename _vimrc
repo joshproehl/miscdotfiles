@@ -89,7 +89,51 @@ set clipboard=unnamed
 
 " Let's give this vimwiki thing a try. It should be in DropBox for fun.
 let g:vimwiki_list=[{'path': '~/Dropbox/.vimwiki', 'path_html': '~/Dropbox/.vimwiki_html'}]
- 
+
+syntax match Tab /\t/
+hi Tab gui=underline guifg=blue ctermbg=blue
+
+" ====================================================
+" Configure Unite plugin
+
+let g:unite_abbr_highlight = 'Comment' 
+let g:unite_source_history_yank_enable    = 1
+let g:unite_source_rec_max_cache_files    = 5000
+
+if executable('ag')
+    let g:unite_source_grep_command       = 'ag'
+    let g:unite_source_grep_default_opts  = '--nocolor --nogroup -S -C4'
+    let g:unite_source_grep_recursive_opt = ''
+elseif executable('ack')
+    let g:unite_source_grep_command       = 'ack'
+    let g:unite_source_grep_default_opts  = '--no-heading --no-color -a -C4'
+    let g:unite_source_grep_recursive_opt = ''
+endif
+
+function! s:unite_settings()
+  nmap <buffer> Q <plug>(unite_exit)
+  nmap <buffer> <esc> <plug>(unite_exit)
+  imap <buffer> <esc> <plug>(unite_exit)
+endfunction
+autocmd FileType unite call s:unite_settings()
+
+
+nmap <Space> [unite]
+nnoremap [unite] <Nop>
+nnoremap <silent> [unite]<space> :<C-u>Unite -toggle -auto-resize -buffer-name=mixed file_rec/async:! buffer file_mru bookmark<cr><c-u>
+nnoremap <silent> [unite]f :<C-U>Unite -auto-resize -silent -buffer-name=files -start-insert -toggle file<CR><C-U>
+nnoremap <silent> [unite]e :<C-U>Unite -auto-resize -silent -buffer-name=recent -start-insert file_mru<CR>
+nnoremap <silent> [unite]y :<C-U>Unite -auto-resize -silent -buffer-name=yanks history/yank<CR>
+nnoremap <silent> [unite]l :<C-U>Unite -auto-resize -silent -buffer-name=line -start-insert line<CR>
+nnoremap <silent> [unite]b :<C-U>Unite -auto-resize -silent -buffer-name=buffers buffer<CR>
+nnoremap <silent> [unite]/ :<C-U>Unite -auto-resize -silent -buffer-name=search -no-quit grep:.<CR>
+nnoremap <silent> [unite]m :<C-U>Unite -auto-resize -silent -buffer-name=mappings mapping<CR>
+nnoremap <silent> [unite]o :<C-U>Unite -auto-resize -silent -buffer-name=outline outline<CR>
+nnoremap <silent> [unite]g :<C-U>Unite -auto-resize -silent -buffer-name=menu -start-insert menu:git<CR>
+
+" Done configuring Unite plugin
+" ====================================================
+
 " Might want machine/user specific stuff, load the .local file.
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
