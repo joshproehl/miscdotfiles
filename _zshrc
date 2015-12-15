@@ -30,6 +30,9 @@ PATH=$HOME/.bin:$HOME/.rbenv/bin:$HOME/.cabal/bin:$HOME/workspace/go/bin/:$PATH
 export GOPATH=$HOME/workspace/go
 eval "$(rbenv init -)"
 
+export DEFAULT_USER="joshproehl"
+export EDITOR="vim"
+
 bindkey -v
 
 alias vi="vim"
