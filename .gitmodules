@@ -94,3 +94,6 @@
 [submodule "_vim/bundle/neomru"]
 	path = _vim/bundle/neomru
 	url = https://github.com/Shougo/neomru.vim.git
+[submodule "_vim/bundle/unite-quickfix"]
+	path = _vim/bundle/unite-quickfix
+	url = https://github.com/osyo-manga/unite-quickfix
