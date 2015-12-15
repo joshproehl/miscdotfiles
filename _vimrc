@@ -150,7 +150,7 @@ let g:unite_source_menu_menus.git.command_candidates = [
         \'Gremove'],
     \['▷ git mv           (Fugitive)                                ⌘ ,gm',
         \'exe "Gmove " input("destination: ")'],
-    \['▷ git push         (Fugitive, output por buffer)             ⌘ ,gp',
+    \['▷ git push         (Fugitive, output buffer)             ⌘ ,gp',
         \'Git! push'],
     \['▷ git pull         (Fugitive, output buffer)             ⌘ ,gP',
         \'Git! pull'],
