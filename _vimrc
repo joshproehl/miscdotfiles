@@ -174,8 +174,12 @@ endif
 
 function! s:unite_settings()
   nmap <buffer> Q <plug>(unite_exit)
-  nmap <buffer> <esc> <plug>(unite_exit)
-  imap <buffer> <esc> <plug>(unite_exit)
+  imap <buffer> <TAB>   <Plug>(unite_select_next_line)
+  imap <buffer> <S-TAB>   <Plug>(unite_select_previous_line)
+  "
+  " Apparently having esc blows up using arrow keys to navigate up/down: https://github.com/Shougo/unite.vim/issues/655
+  "nmap <buffer> <esc> <plug>(unite_exit)
+  "imap <buffer> <esc> <plug>(unite_exit)
 endfunction
 autocmd FileType unite call s:unite_settings()
 
