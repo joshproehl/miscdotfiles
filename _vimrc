@@ -93,6 +93,11 @@ let g:vimwiki_list=[{'path': '~/Dropbox/.vimwiki', 'path_html': '~/Dropbox/.vimw
 syntax match Tab /\t/
 hi Tab gui=underline guifg=blue ctermbg=blue
 
+let g:gitgutter_highlight_lines = 0
+let g:gitgutter_realtime        = 1
+let g:gitgutter_eager           = 1
+
+
 " ====================================================
 " Configure Unite plugin
 

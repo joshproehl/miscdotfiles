@@ -82,3 +82,6 @@
 [submodule "_vim/bundle/unite"]
 	path = _vim/bundle/unite
 	url = https://github.com/Shougo/unite.vim.git
+[submodule "_vim/bundle/vim-gitgutter"]
+	path = _vim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
