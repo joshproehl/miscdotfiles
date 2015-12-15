@@ -43,8 +43,11 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 set expandtab
-set list listchars=tab:→\ ,trail:·
 set cursorline
+
+" Config showing invisible characters
+nmap <Leader>eh :set list!<CR>
+set listchars=tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶
 
 set statusline=%t\ %y\ %([%R%M]%)\ %{fugitive#statusline()}\ \ %=buffer:\ #%n\ at:\ [%l/%L,%c] 
 if has('title')
