@@ -97,3 +97,6 @@
 [submodule "_vim/bundle/unite-quickfix"]
 	path = _vim/bundle/unite-quickfix
 	url = https://github.com/osyo-manga/unite-quickfix
+[submodule "_vim/bundle/gitv"]
+	path = _vim/bundle/gitv
+	url = https://github.com/gregsexton/gitv.git

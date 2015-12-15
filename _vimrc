@@ -99,6 +99,19 @@ let g:gitgutter_eager           = 1
 
 nnoremap <Leader>gt :!tig<CR>:redraw!<CR>
 
+" ===================
+" GitV Configuration
+nnoremap <silent> <leader>gv :Gitv --all<CR>
+nnoremap <silent> <leader>gV :Gitv! --all<CR>
+vnoremap <silent> <leader>gV :Gitv! --all<CR>
+
+let g:Gitv_OpenHorizontal = 'auto'
+let g:Gitv_WipeAllOnClose = 1
+let g:Gitv_DoNotMapCtrlKey = 1
+" let g:Gitv_WrapLines = 1
+
+autocmd FileType git set nofoldenable
+
 " ====================================================
 " Configure Unite plugin
 
