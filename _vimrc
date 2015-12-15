@@ -122,6 +122,43 @@ function! s:unite_settings()
 endfunction
 autocmd FileType unite call s:unite_settings()
 
+if !exists('g:unite_source_menu_menus')
+    let g:unite_source_menu_menus = {}
+endif
+let g:unite_source_menu_menus.git = {
+    \ 'description' : '           manage git repositories
+        \                            ⌘ [space]g',
+    \}
+let g:unite_source_menu_menus.git.command_candidates = [
+    \['▷ tig                                                        ⌘ ,gt',
+        \'normal ,gt'],
+    \['▷ git status       (Fugitive)                                ⌘ ,gs',
+        \'Gstatus'],
+    \['▷ git diff         (Fugitive)                                ⌘ ,gd',
+        \'Gdiff'],
+    \['▷ git commit       (Fugitive)                                ⌘ ,gc',
+        \'Gcommit'],
+    \['▷ git log          (Fugitive)                                ⌘ ,gl',
+        \'exe "silent Glog | Unite quickfix"'],
+    \['▷ git blame        (Fugitive)                                ⌘ ,gb',
+        \'Gblame'],
+    \['▷ git stage        (Fugitive)                                ⌘ ,gw',
+        \'Gwrite'],
+    \['▷ git checkout     (Fugitive)                                ⌘ ,go',
+        \'Gread'],
+    \['▷ git rm           (Fugitive)                                ⌘ ,gr',
+        \'Gremove'],
+    \['▷ git mv           (Fugitive)                                ⌘ ,gm',
+        \'exe "Gmove " input("destination: ")'],
+    \['▷ git push         (Fugitive, output por buffer)             ⌘ ,gp',
+        \'Git! push'],
+    \['▷ git pull         (Fugitive, output buffer)             ⌘ ,gP',
+        \'Git! pull'],
+    \['▷ git prompt       (Fugitive, output buffer)             ⌘ ,gi',
+        \'exe "Git! " input("git: ")'],
+    \['▷ git cd           (Fugitive)',
+        \'Gcd'],
+    \]
 
 nmap <Space> [unite]
 nnoremap [unite] <Nop>
