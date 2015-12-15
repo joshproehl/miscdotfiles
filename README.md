@@ -20,6 +20,11 @@ For (Arch) linux:
 Things to do beyond the bootstrap file. Perhaps a bit too complex to let bootstrap do it?
 
 * Run .vim/bundle/YouCompleteMe/install.sh
+* Run .vim/bundle/vimproc/make
+
+## System Changes
+Arch Linux:
+  Add the line "export _JAVA_AWT_WM_NONREPARENTING=1" to /etc/profile.d/jre.sh to ensure java apps all launch with that environment variable.
 
 
 ## Arch Packages
