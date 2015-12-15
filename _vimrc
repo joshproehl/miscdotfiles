@@ -49,6 +49,10 @@ set cursorline
 nmap <Leader>eh :set list!<CR>
 set listchars=tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶
 
+" Doing some tricky business to get the scrollbars to actually hide in gvim
+set go+=rRlLbh  " show all scrollbars
+set go-=rRlLbh  " now hide all scrollbars
+
 set statusline=%t\ %y\ %([%R%M]%)\ %{fugitive#statusline()}\ \ %=buffer:\ #%n\ at:\ [%l/%L,%c] 
 if has('title')
   set titlestring=%t%(\ [%R%M]%)
