@@ -53,10 +53,9 @@ set listchars=tab:→\ ,eol:↵,trail:·,extends:↷,precedes:↶
 set go+=rRlLbh  " show all scrollbars
 set go-=rRlLbh  " now hide all scrollbars
 
-set statusline=%t\ %y\ %([%R%M]%)\ %{fugitive#statusline()}\ \ %=buffer:\ #%n\ at:\ [%l/%L,%c] 
-if has('title')
-  set titlestring=%t%(\ [%R%M]%)
-endif
+" Set up vim-airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " Highlighting for search results, plus a shortcut to un-highlight them.
 nnoremap <leader><space> :noh<cr>

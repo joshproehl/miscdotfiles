@@ -55,9 +55,6 @@
 [submodule "_vim/bundle/syntastic"]
 	path = _vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule "_vim/bundle/vim-powerline"]
-	path = _vim/bundle/vim-powerline
-	url = https://github.com/Lokaltog/vim-powerline.git
 [submodule "_vim/bundle/YouCompleteMe"]
 	path = _vim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
@@ -100,3 +97,6 @@
 [submodule "_vim/bundle/gitv"]
 	path = _vim/bundle/gitv
 	url = https://github.com/gregsexton/gitv.git
+[submodule "_vim/bundle/vim-airline"]
+	path = _vim/bundle/vim-airline
+	url = https://github.com/bling/vim-airline.git
