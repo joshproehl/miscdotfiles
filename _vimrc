@@ -157,7 +157,7 @@ autocmd FileType git set nofoldenable
 " ====================================================
 " Configure Unite plugin
 
-let g:unite_abbr_highlight = 'Comment' 
+let g:unite_abbr_highlight = 'Comment'
 let g:unite_source_history_yank_enable    = 1
 let g:unite_source_rec_max_cache_files    = 5000
 
@@ -175,7 +175,7 @@ function! s:unite_settings()
   nmap <buffer> Q <plug>(unite_exit)
   imap <buffer> <TAB>   <Plug>(unite_select_next_line)
   imap <buffer> <S-TAB>   <Plug>(unite_select_previous_line)
-  "
+
   " Apparently having esc blows up using arrow keys to navigate up/down: https://github.com/Shougo/unite.vim/issues/655
   "nmap <buffer> <esc> <plug>(unite_exit)
   "imap <buffer> <esc> <plug>(unite_exit)
