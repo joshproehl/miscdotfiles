@@ -130,7 +130,7 @@ myStartupHook = do
 myLogHook h = dynamicLogWithPP ( defaultPP
   {
       ppCurrent         = dzenColor color15 background
-    , ppVisible         = dzenColor color14 background
+    , ppVisible         = dzenColor color7 background
     , ppHidden          = dzenColor color14 background
     , ppHiddenNoWindows = dzenColor background background
     , ppUrgent          = dzenColor "red" background . wrap ">" "<" . dzenStrip
