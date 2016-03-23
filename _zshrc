@@ -34,6 +34,7 @@ export DEFAULT_USER="joshproehl"
 export EDITOR="vim"
 
 bindkey -v
+bindkey "^R" history-incremental-search-backward
 
 alias vi="vim"
 alias gpoh="git push origin HEAD"
