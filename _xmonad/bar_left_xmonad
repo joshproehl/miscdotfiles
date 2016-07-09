@@ -14,5 +14,10 @@ statusBarHeight=$5
 #xWidth=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f1)
 #Yaxis=$(xrandr --current | grep '*' | uniq | awk '{print $1}' | cut -d 'x' -f2)
 
+## Commented these out to switch to using -xs and -ta instead. Seems to be working better, leaving
+## the old way here in case I have to revert on a different machine.
+##posx=$(xrandr | grep "LVDS1 connected" | cut -d ' ' -f 3 | cut -d '+' -f2)
+##posy=$(xrandr | grep "LVDS1 connected" | cut -d ' ' -f 3 | cut -d '+' -f3)
+##dzen2 -x $posx -y $posy -w $xmonadStatusWidth -h $statusBarHeight -ta 'l' -bg $background -fg $foreground -fn $font -e 'button3='
 
-dzen2 -x '0' -y '0' -w $xmonadStatusWidth -h $statusBarHeight -ta 'l' -bg $background -fg $foreground -fn $font -e 'button3='
+dzen2 -xs 1 -ta l -w $xmonadStatusWidth -h $statusBarHeight -bg $background -fg $foreground -fn $font -e 'button3='

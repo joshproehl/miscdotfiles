@@ -7,13 +7,13 @@ import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.FadeWindows
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.SetWMName
+--import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Grid
 import XMonad.Layout.IM
 import XMonad.Layout.PerWorkspace
-import XMonad.Layout.Reflect
+-- import XMonad.Layout.Reflect -- Don't need with GIMP specific layout disabled
 import XMonad.Layout.Spacing
 -- import XMonad.Layout.Drawer -- Leaving to remember it exists in the future.
 -- import XMonad.Layout.Spiral -- Leaving to remember it exists in the future.
@@ -54,13 +54,13 @@ myManageHook = composeAll . concat $
     myTitleFloats = [ "Downloads", "Add-ons", "Firefox Preferences" ]
 
 
-myLayoutHook = avoidStruts $
+myLayoutHook = avoidStruts $ 
   --onWorkspace "7" gimp $
   onWorkspace "1:comm" imLayout $
   standardLayouts
   where
     tall = Tall 1 0.02  0.5
-    standardLayouts = ResizableTall 1 (3/100) (1/2) [] ||| Full ||| Mirror tall -- spiral (6/7) ||| Mirror tall
+    standardLayouts = ResizableTall 1 (3/100) (1/2) [] ||| Full ||| Mirror tall -- spiral (6/7)
     imLayout = withIM (1/5) (Role "buddy_list") Grid --(standardLayouts)
     --gimp = withIM (0.11) (Role "gimp-toolbox") $
     --       reflectHoriz $
