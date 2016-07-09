@@ -124,8 +124,8 @@ addKeys conf@(XConfig {modMask = modm}) =
 
 
 
-myStartupHook = do
-    setWMName "LG3D" --java hack
+-- myStartupHook = do
+    -- setWMName "LG3D" --java hack
 
 myLogHook h = dynamicLogWithPP ( defaultPP
   {
@@ -167,7 +167,7 @@ main = do
     , borderWidth = 1
     , normalBorderColor = "#444444"
     , focusedBorderColor = "#005577"
-    , startupHook = myStartupHook
+    -- , startupHook = myStartupHook
     , manageHook  = manageDocks <+> myManageHook <+> namedScratchpadManageHook scratchpads <+> manageHook defaultConfig
     --, manageHook  = insertPosition Master Newer <+> manageDocks <+> myManageHook <+> manageHook defaultConfig
     , layoutHook  = myLayoutHook
