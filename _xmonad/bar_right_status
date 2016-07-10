@@ -17,8 +17,9 @@ statusBarHeight=$5
 
 ## Couldn't get -xs and -ta to do the job for the second bar, but the first one provides the struts,
 ## so I'm just going to leave it, seems to work.
-xWidth=$(xrandr | grep "LVDS1 connected" | cut -d ' ' -f3 | cut -d '+' -f1 | cut -d 'x' -f1)
-posy=$(xrandr | grep "LVDS1 connected" | cut -d ' ' -f 3 | cut -d '+' -f3)
+dimension=$(xrandr | grep "LVDS1 connected" | egrep -o "[0-9]+x[0-9]+\+[0-9]+\+[0-9]+")
+xWidth=$(echo $dimension | cut -d '+' -f1 | cut -d 'x' -f1)
+posy=$(echo $dimension | cut -d ' ' -f 3 | cut -d '+' -f3)
 statusWidth=$((xWidth-xmonadStatusWidth-trayerWidth))
 conky -qc $HOME/.xmonad/conky_dzen | dzen2 -x $xmonadStatusWidth -w $statusWidth -h $statusBarHeight -ta 'r' -bg $background -fg $foreground -y $posy -fn $font -e 'button3=' -dock &
 
