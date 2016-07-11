@@ -17,7 +17,7 @@ statusBarHeight=$5
 
 ## Couldn't get -xs and -ta to do the job for the second bar, but the first one provides the struts,
 ## so I'm just going to leave it, seems to work.
-dimension=$(xrandr | grep "LVDS1 connected" | egrep -o "[0-9]+x[0-9]+\+[0-9]+\+[0-9]+")
+dimension=$(xrandr | grep "connected primary" | egrep -o "[0-9]+x[0-9]+\+[0-9]+\+[0-9]+")
 xWidth=$(echo $dimension | cut -d '+' -f1 | cut -d 'x' -f1)
 posy=$(echo $dimension | cut -d ' ' -f 3 | cut -d '+' -f3)
 statusWidth=$((xWidth-xmonadStatusWidth-trayerWidth))
