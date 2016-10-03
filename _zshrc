@@ -42,5 +42,5 @@ alias be="bundle exec"
 
 # Aliases for taskwarrior. Note the space to prevent them from going into history.
 alias t=" task"
-alias tw=" task"
-alias task=" task"
+alias tw=" timew"
+alias ts=" tasksh"
