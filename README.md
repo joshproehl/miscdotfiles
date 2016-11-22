@@ -8,6 +8,7 @@ This repo is expected to be cloned to ~/.miscdotfiles
 Needs to be installed before this can be bootstrapped:
 * Git - To get this, plus submodules.
 * Ruby (LibYAML) - For Rake
+* Python2 - (For YouCompleteMe bootstraping)
 * ZSH - Because it's the shell
 * CMake - For YouCompleteMe's install script
 
@@ -19,13 +20,14 @@ For (Arch) linux:
 ## Post Bootstrap
 Things to do beyond the bootstrap file. Perhaps a bit too complex to let bootstrap do it?
 
-* Run .vim/bundle/YouCompleteMe/install.sh
+* Run .vim/bundle/YouCompleteMe/install.py  (As of 2016/11 on Arch Linux script must be altered to call python2 out of env to run)
 * Run .vim/bundle/vimproc/make
 
 ## System Changes
 Arch Linux:
   Add the line "export _JAVA_AWT_WM_NONREPARENTING=1" to /etc/profile.d/jre.sh to ensure java apps all launch with that environment variable.
-
+  `sudo mv 01-keyboard-layout.conf /etc/X11/xorg.conf.d/`
+  Set primary monitor (/etc/X11/10-monitor.conf, or xrandr)
 
 ## Arch Packages
 Other things Arch expects to have set up:
@@ -40,13 +42,15 @@ Regular packages
 * conky
 * sysstat (System status used by dzen-conky)
 * bc (Command line calculator used by dzen/conky)
+* task  (Vim config wants it)
+* terminator (Xmonad configured to use as terminal)
 
 From AUR
 * trayer-srg
 * compton
 * copyq
 * dropbox
-* yeganesh
+* yeganesh (TODO: AUR package missing. Replace?)
 * python2-deepin-ui
 * caffeine-ng-git (Switched to -git because regular version eats all your ram.)
 
