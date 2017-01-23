@@ -15,6 +15,7 @@ import XMonad.Layout.IM
 import XMonad.Layout.PerWorkspace
 -- import XMonad.Layout.Reflect -- Don't need with GIMP specific layout disabled
 import XMonad.Layout.Spacing
+import XMonad.Layout.Tabbed
 -- import XMonad.Layout.Drawer -- Leaving to remember it exists in the future.
 -- import XMonad.Layout.Spiral -- Leaving to remember it exists in the future.
 import qualified XMonad.StackSet as W -- Prevent conflict of .workspaces
@@ -22,6 +23,7 @@ import XMonad.Util.CustomKeys
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.SpawnOnce
+import XMonad.Util.Themes
 import System.IO
 import Data.List
 
@@ -54,14 +56,22 @@ myManageHook = composeAll . concat $
     myTitleFloats = [ "Downloads", "Add-ons", "Firefox Preferences" ]
 
 
+-- Configure the Tabbed layout
+-- TODO: Tune theme
+myTabbedConfig = (theme smallClean)
+myTabbedConfig2 = defaultTheme { inactiveBorderColor = "#FF0000"
+                              , activeTextColor = "#00FF00"
+                              , fontName = "-*-nu-*-*-*-*-*-*-*-*-*-*-*-*-*" } -- "-*-terminus-medium-*-normal-*-10-*-*-*-*-*-*-*" }
+
+
 myLayoutHook = avoidStruts $ 
   --onWorkspace "7" gimp $
-  onWorkspace "1:comm" imLayout $
+  --onWorkspace "1:comm" imLayout $
   standardLayouts
   where
-    tall = Tall 1 0.02  0.5
-    standardLayouts = ResizableTall 1 (3/100) (1/2) [] ||| Full ||| Mirror tall -- spiral (6/7)
-    imLayout = withIM (1/5) (Role "buddy_list") Grid --(standardLayouts)
+    myResizableTall = ResizableTall 1 (3/100) (1/2) []
+    standardLayouts = tabbed shrinkText myTabbedConfig ||| myResizableTall ||| Mirror myResizableTall -- spiral (6/7)
+    --imLayout = withIM (1/5) (Role "buddy_list") Grid --(standardLayouts)
     --gimp = withIM (0.11) (Role "gimp-toolbox") $
     --       reflectHoriz $
     --       withIM (0.15) (Role "gimp-dock") Full
@@ -69,7 +79,7 @@ myLayoutHook = avoidStruts $
 
 -- Define our workspaces.
 myWorkspaces :: [WorkspaceId]
-myWorkspaces = ["1:comm"] ++ (map show [2..13])
+myWorkspaces = ["1:comm"] ++ (map show [2..12]) ++ ["13:tasks"]
 
 -- RationalRect params are: left,top,width,height
 scratchpads =
@@ -140,10 +150,13 @@ myLogHook h = dynamicLogWithPP ( defaultPP
                           (\x -> case x of
                             -- TODO: Figure out why neither $HOME nor ~ work here and fix it.
                             "Full"                    ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_full.xbm)"
+                            "Tabbed Simplest"         ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_full.xbm)"
                             "Spacing 5 ResizableTall" ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_tall.xbm)"
                             "ResizableTall"           ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_tall.xbm)"
+                            "Mirror ResizableTall"    ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_mirror_tall.xbm)"
                             "SimplestFloat"           ->  "^i(/home/joshproehl/.xmonad/dzen2/mouse_01.xbm)"
                             "Circle"                  ->  "^i(/home/joshproehl/.xmonad/dzen2/full.xbm)"
+                            --_                         ->  x
                             _                         ->  "^i(/home/joshproehl/.xmonad/dzen2/grid.xbm)"
                           )
     , ppTitle           = wrap "^ca(1,xdotool key alt+shift+x)" "^ca()" . dzenColor color15 background . shorten 50 . pad
