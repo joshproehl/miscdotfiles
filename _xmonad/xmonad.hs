@@ -50,6 +50,7 @@ myManageHook = composeAll . concat $
   , [ className =? "Quasselclient" --> doShift "1:comm" ]
   , [ className =? c --> doFloat | c <- myClassFloats ]
   , [ title =? t --> doFloat | t <- myTitleFloats ]
+  , [ manageDocks ]
   ]
   where
     myClassFloats = [ "Gimp", "Octave" ]
@@ -64,7 +65,7 @@ myTabbedConfig2 = defaultTheme { inactiveBorderColor = "#FF0000"
                               , fontName = "-*-nu-*-*-*-*-*-*-*-*-*-*-*-*-*" } -- "-*-terminus-medium-*-normal-*-10-*-*-*-*-*-*-*" }
 
 
-myLayoutHook = avoidStruts $ 
+myLayoutHook = avoidStruts $
   --onWorkspace "7" gimp $
   --onWorkspace "1:comm" imLayout $
   standardLayouts
@@ -97,6 +98,8 @@ addKeys conf@(XConfig {modMask = modm}) =
   [ ((modm,               xK_a),      spawn "xmenud") -- Mod-A to open app menu
   , ((modm,               xK_p),      spawn "~/.miscdotfiles/scripts/launch_dmenu_yeganesh.sh")
   , ((modm,               xK_q),      spawn "killall dzen2; killall conky; xmonad --restart")
+
+  , ((modm,               xK_b),      sendMessage ToggleStruts)
 
   -- Cycle to workspaces
   , ((modm,               xK_Right),  nextWS)
@@ -162,7 +165,7 @@ myLogHook h = dynamicLogWithPP ( defaultPP
     , ppTitle           = wrap "^ca(1,xdotool key alt+shift+x)" "^ca()" . dzenColor color15 background . shorten 50 . pad
     , ppOrder           = \(ws:l:t:_) -> [ws,l, t]
     , ppOutput          = hPutStrLn h
---    , ppSort            = fmap (namedScratchpadFilterOutWorkspace .) (ppSort defaultPP) 
+--    , ppSort            = fmap (namedScratchpadFilterOutWorkspace .) (ppSort defaultPP)
   } )
 
 myXmonadBar = "~/.xmonad/bar_left_xmonad '"++foreground++"' '"++background++"' "++myFont ++ " " ++ xmonadStatusWidth ++ " " ++ statusbarHeight
@@ -180,12 +183,12 @@ main = do
     , borderWidth = 1
     , normalBorderColor = "#444444"
     , focusedBorderColor = "#005577"
-    -- , startupHook = myStartupHook
-    , manageHook  = manageDocks <+> myManageHook <+> namedScratchpadManageHook scratchpads <+> manageHook defaultConfig
+    , startupHook = docksStartupHook
+    , manageHook  = myManageHook <+> namedScratchpadManageHook scratchpads <+> manageHook defaultConfig
     --, manageHook  = insertPosition Master Newer <+> manageDocks <+> myManageHook <+> manageHook defaultConfig
     , layoutHook  = myLayoutHook
     , logHook     = myLogHook dzenLeftBar
-    , handleEventHook = fadeWindowsEventHook
+    , handleEventHook = docksEventHook <+> fadeWindowsEventHook
     , workspaces      = myWorkspaces
     }
 
