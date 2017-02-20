@@ -97,7 +97,7 @@ addKeys :: XConfig l -> [((KeyMask, KeySym), X ())]
 addKeys conf@(XConfig {modMask = modm}) =
   [ ((modm,               xK_a),      spawn "xmenud") -- Mod-A to open app menu
   , ((modm,               xK_p),      spawn "~/.miscdotfiles/scripts/launch_dmenu_yeganesh.sh")
-  , ((modm,               xK_q),      spawn "killall dzen2; killall conky; xmonad --restart")
+  , ((modm,               xK_q),      spawn "killall dzen2; killall conky; killall trayer; xmonad --restart")
 
   , ((modm,               xK_b),      sendMessage ToggleStruts)
 
@@ -168,8 +168,8 @@ myLogHook h = dynamicLogWithPP ( defaultPP
 --    , ppSort            = fmap (namedScratchpadFilterOutWorkspace .) (ppSort defaultPP)
   } )
 
-myXmonadBar = "~/.xmonad/bar_left_xmonad '"++foreground++"' '"++background++"' "++myFont ++ " " ++ xmonadStatusWidth ++ " " ++ statusbarHeight
-myStatusBar = "~/.xmonad/bar_right_status '"++foreground++"' '"++background++"' "++myFont ++ " " ++ xmonadStatusWidth ++ " " ++ statusbarHeight
+myXmonadBar = "~/.xmonad/bar_left_xmonad '"++foreground++"' '"++background++"' "++myFont ++ " " ++ xmonadStatusWidth ++ " " ++ statusbarHeight ++ " " ++ trayerwidth
+myStatusBar = "~/.xmonad/bar_right_status '"++foreground++"' '"++background++"' "++myFont ++ " " ++ xmonadStatusWidth ++ " " ++ statusbarHeight ++ " " ++ trayerwidth
 
 main = do
   dzenLeftBar   <- spawnPipe myXmonadBar
@@ -196,6 +196,7 @@ main = do
 
 xmonadStatusWidth = "600"
 statusbarHeight = "14"
+trayerwidth = "90"
 
 -- EROSION EDIT
 myFont		= "-*-terminus-medium-*-normal-*-10-*-*-*-*-*-*-*"
