@@ -26,7 +26,7 @@ plugins=(taskwarrior git ruby)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-PATH=$HOME/.bin:$HOME/.rbenv/bin:$HOME/.cabal/bin:$HOME/workspace/go/bin/:$PATH
+PATH=$HOME/.bin:$HOME/.rbenv/bin:$HOME/.composer/vendor/bin:$HOME/.cabal/bin:$HOME/workspace/go/bin/:$PATH
 export GOPATH=$HOME/workspace/go
 eval "$(rbenv init -)"
 
