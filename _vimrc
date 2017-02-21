@@ -93,8 +93,8 @@ let macvim_hig_shift_movement = 1
 " OSX Clipboard support
 set clipboard=unnamed
 
-" Let's give this vimwiki thing a try. It should be in DropBox for fun.
-let g:vimwiki_list=[{'path': '~/Dropbox/.vimwiki', 'path_html': '~/Dropbox/.vimwiki_html'}]
+" Let's give this vimwiki thing a try. Store files in a SyncThing folder.
+let g:vimwiki_list=[{'path': '~/JCloud/.vimwiki', 'path_html': '~/JCloud/.vimwiki_html'}]
 
 syntax match Tab /\t/
 hi Tab gui=underline guifg=blue ctermbg=blue
