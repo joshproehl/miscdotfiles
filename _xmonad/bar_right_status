@@ -16,7 +16,7 @@ primaryMonitorXWidth=$(echo $primaryMonitorDimensionAndPosition | cut -d '+' -f1
 primaryMonitorXPos=$(echo $primaryMonitorDimensionAndPosition | cut -d '+' -f2)
 primaryMonitorYPos=$(echo $primaryMonitorDimensionAndPosition | cut -d '+' -f3)
 statusPosX=$((primaryMonitorXPos+xmonadStatusWidth))
-statusPosY=primaryMonitorYPos
+statusPosY=$primaryMonitorYPos
 statusWidth=$((primaryMonitorXWidth-xmonadStatusWidth-trayerWidth))
 
 # The right status bar
