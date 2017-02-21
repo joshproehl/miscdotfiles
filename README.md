@@ -50,7 +50,7 @@ From AUR
 * compton
 * copyq
 * dropbox
-* yeganesh (TODO: AUR package missing. Replace?)
+* yegonesh
 * python2-deepin-ui
 * caffeine-ng-git (Switched to -git because regular version eats all your ram.)
 
