@@ -1,6 +1,7 @@
 import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.Warp
+import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog hiding (xmobar, xmobarPP, xmobarColor, sjanssenPP, byorgeyPP)
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.InsertPosition
@@ -176,7 +177,7 @@ main = do
   dzenRightBar  <- spawnPipe myStatusBar
 
   xmonad $ withUrgencyHook dzenUrgencyHook { args = ["-bg", "darkgreen", "-xs", "1"] }
-         $ ewmh defaultConfig
+         $ ewmh desktopConfig
     { terminal    = "terminator"
     , modMask     = mod4Mask  -- Use the "windows" key as the mod key.
     , keys        = customKeys delKeys addKeys
