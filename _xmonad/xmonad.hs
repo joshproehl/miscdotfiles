@@ -33,11 +33,12 @@ import Data.List
 -- TODO: Create workspace on the fly for Gimp?
 
 -- Set up the hook for fadeWindows
+-- Note that these go left-to-right, so opaque is the default and other properties are applied in order. (Last prop wins)
 myFadeHook = composeAll
-  [ opaque                          -- Default to opaque windows
-  , isFloating --> opaque           -- opacity 0.9
-  , isUnfocused --> opacity 0.65    -- Unfocused is 65% of opaque
-  , isDialog --> opaque             -- Dialog windows should go on top
+  [ opaque
+  , isUnfocused --> opacity 0.95    -- Unfocused is 90% of opaque
+  , isFloating  --> opacity 0.99    -- Floating windows less transparent than what they're on top of
+  , isDialog    --> opaque          -- Dialog windows should go on top
   ]
 
 
@@ -188,7 +189,7 @@ main = do
     , manageHook  = myManageHook <+> namedScratchpadManageHook scratchpads <+> manageHook defaultConfig
     --, manageHook  = insertPosition Master Newer <+> manageDocks <+> myManageHook <+> manageHook defaultConfig
     , layoutHook  = myLayoutHook
-    , logHook     = myLogHook dzenLeftBar
+    , logHook     = myLogHook dzenLeftBar <+> fadeWindowsLogHook myFadeHook
     , handleEventHook = docksEventHook <+> fadeWindowsEventHook
     , workspaces      = myWorkspaces
     }
