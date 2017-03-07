@@ -33,7 +33,7 @@ Arch Linux:
 Other things Arch expects to have set up:
 
 Regular packages
-* nitrogen
+* feh
 * xorg-xsetroot
 * redshift
 * terminus-font
