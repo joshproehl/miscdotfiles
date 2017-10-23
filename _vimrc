@@ -160,6 +160,13 @@ nnoremap <Leader>ggc :silent! Ggrep -i<Space>
 " for the diffmode
 noremap <Leader>du :diffupdate<CR>
 
+" ===================
+" UndoTree configuration
+nnoremap <F5> :UndotreeToggle<cr>
+if has("persistent_undo")
+  set undodir=~/.vim/undo/
+  set undofile
+endif
 
 " ===================
 " GitV Configuration
