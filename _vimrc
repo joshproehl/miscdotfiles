@@ -119,6 +119,15 @@ let g:syntastic_check_on_wq = 0
 "let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 "let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
+let g:syntastic_html_tidy_ignore_errors = [
+  \"trimming empty <i>",
+  \"trimming empty <span>",
+  \"<input> proprietary attribute \"autocomplete\"",
+  \"proprietary attribute \"role\"",
+  \"proprietary attribute \"hidden\"",
+  \"proprietary attribute \"ng-",
+  \"proprietary attribute \"v-",
+\]
 " =======================
 " Set up GitGutter plugin
 let g:gitgutter_highlight_lines = 0
