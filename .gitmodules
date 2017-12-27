@@ -104,5 +104,5 @@
 	path = _vim/bundle/vim-twig
 	url = https://github.com/lumiliet/vim-twig.git
 [submodule "_vim/bundle/undotree"]
-	path = _vim/bundle/undotree
+	path = _vim/pack/joshproehl/start/undotree
 	url = https://github.com/mbbill/undotree.git
