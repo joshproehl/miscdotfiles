@@ -17,7 +17,7 @@
 	path = _vim/bundle/command-t
 	url = git://git.wincent.com/command-t.git
 [submodule "_vim/bundle/nerdtree"]
-	path = _vim/bundle/nerdtree
+	path = _vim/pack/joshproehl/start/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
 [submodule "_vim/bundle/vim-rails"]
 	path = _vim/bundle/vim-rails
