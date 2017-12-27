@@ -23,7 +23,7 @@
 	path = _vim/bundle/vim-rails
 	url = https://github.com/tpope/vim-rails.git
 [submodule "_vim/bundle/nerdcommenter"]
-	path = _vim/bundle/nerdcommenter
+	path = _vim/pack/joshproehl/start/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
 [submodule "_vim/bundle/surround"]
 	path = _vim/bundle/surround
