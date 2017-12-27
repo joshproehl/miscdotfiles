@@ -53,7 +53,7 @@
 	path = _vim/bundle/vim-gnupg
 	url = https://github.com/jamessan/vim-gnupg.git
 [submodule "_vim/bundle/syntastic"]
-	path = _vim/bundle/syntastic
+	path = _vim/pack/joshproehl/start/syntastic
 	url = https://github.com/scrooloose/syntastic.git
 [submodule "_vim/bundle/YouCompleteMe"]
 	path = _vim/bundle/YouCompleteMe
