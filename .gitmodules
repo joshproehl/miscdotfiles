@@ -62,7 +62,7 @@
 	path = _vim/bundle/ag.vim
 	url = https://github.com/rking/ag.vim
 [submodule "_vim/bundle/camelCaseMotion"]
-  path = _vim/bundle/camelCaseMotion
+	path = _vim/pack/joshproehl/start/camelCaseMotion
   url = https://github.com/vim-scripts/camelcasemotion.git
 [submodule "_vim/bundle/base16-vim"]
 	path = _vim/bundle/base16-vim
