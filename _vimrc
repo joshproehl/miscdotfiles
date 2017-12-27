@@ -178,6 +178,10 @@ if has("persistent_undo")
 endif
 
 " ===================
+" EditorConfig Configuration
+let g:EditorConfig_exclude_patterns = ['fugitive://.*']
+
+" ===================
 " GitV Configuration
 nnoremap <silent> <leader>gv :Gitv --all<CR>
 nnoremap <silent> <leader>gV :Gitv! --all<CR>

@@ -106,3 +106,6 @@
 [submodule "_vim/bundle/undotree"]
 	path = _vim/pack/joshproehl/start/undotree
 	url = https://github.com/mbbill/undotree.git
+[submodule "_vim/pack/joshproehl/start/editorconfig"]
+	path = _vim/pack/joshproehl/start/editorconfig
+	url = https://github.com/editorconfig/editorconfig-vim.git
