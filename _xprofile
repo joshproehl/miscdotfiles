@@ -6,3 +6,4 @@ dropbox start &
 copyq &
 xscreensaver -nosplash &
 caffeine &
+setxkbmap -option compose:ralt &
