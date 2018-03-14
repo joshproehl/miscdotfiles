@@ -8,12 +8,15 @@ import XMonad.Hooks.InsertPosition
 import XMonad.Hooks.FadeWindows
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
---import XMonad.Hooks.SetWMName
+import XMonad.Hooks.SetWMName
 import XMonad.Hooks.UrgencyHook
-import XMonad.Layout.ResizableTile
+import XMonad.Layout.FixedColumn
 import XMonad.Layout.Grid
-import XMonad.Layout.IM
+-- import XMonad.Layout.IM -- Not actually using right now, but might want to again.
+import XMonad.Layout.LimitWindows
+import XMonad.Layout.Magnifier
 import XMonad.Layout.PerWorkspace
+import XMonad.Layout.ResizableTile
 -- import XMonad.Layout.Reflect -- Don't need with GIMP specific layout disabled
 import XMonad.Layout.Spacing
 import XMonad.Layout.Tabbed
@@ -52,7 +55,6 @@ myManageHook = composeAll . concat $
   , [ className =? "Quasselclient" --> doShift "1:comm" ]
   , [ className =? c --> doFloat | c <- myClassFloats ]
   , [ title =? t --> doFloat | t <- myTitleFloats ]
-  , [ manageDocks ]
   ]
   where
     myClassFloats = [ "Gimp", "Octave" ]
@@ -61,19 +63,23 @@ myManageHook = composeAll . concat $
 
 -- Configure the Tabbed layout
 -- TODO: Tune theme
-myTabbedConfig = (theme smallClean)
-myTabbedConfig2 = defaultTheme { inactiveBorderColor = "#FF0000"
-                              , activeTextColor = "#00FF00"
-                              , fontName = "-*-nu-*-*-*-*-*-*-*-*-*-*-*-*-*" } -- "-*-terminus-medium-*-normal-*-10-*-*-*-*-*-*-*" }
+myTabbedConfig = def { inactiveBorderColor = "#FF0000"
+                      , activeTextColor = "#00FF00"
+                      , fontName = "-*-nu-*-*-*-*-*-*-*-*-*-*-*-*-*"
+                      --, fontName = "-*-terminus-medium-*-normal-*-10-*-*-*-*-*-*-*"
+                      --, fontName = "-*-iosevka thin-*-*-*-*-*-*-*-*-*-*-*-*"
+                      }
 
 
-myLayoutHook = avoidStruts $
+myLayoutHook = avoidStruts $ standardLayouts
   --onWorkspace "7" gimp $
   --onWorkspace "1:comm" imLayout $
-  standardLayouts
+  --spacing 0 $ standardLayouts
   where
+    standardLayouts = myTabbed ||| myResizableTall ||| Mirror myResizableTall -- ||| myZoomer -- spiral (6/7)
     myResizableTall = ResizableTall 1 (3/100) (1/2) []
-    standardLayouts = tabbed shrinkText myTabbedConfig ||| myResizableTall ||| Mirror myResizableTall -- spiral (6/7)
+    myZoomer = limitWindows 3 $ magnifiercz' 1.4 $ FixedColumn 1 20 80 10
+    myTabbed = tabbed shrinkText (theme kavonForestTheme)
     --imLayout = withIM (1/5) (Role "buddy_list") Grid --(standardLayouts)
     --gimp = withIM (0.11) (Role "gimp-toolbox") $
     --       reflectHoriz $
@@ -101,7 +107,7 @@ addKeys conf@(XConfig {modMask = modm}) =
   , ((modm,               xK_p),      spawn "~/.miscdotfiles/scripts/app_launcher.sh")
   , ((modm,               xK_q),      spawn "killall dzen2; killall conky; killall trayer; xmonad --restart")
 
-  , ((modm,               xK_b),      sendMessage ToggleStruts)
+  , ((modm .|. shiftMask, xK_b),      sendMessage ToggleStruts)
 
   -- Cycle to workspaces
   , ((modm,               xK_Right),  nextWS)
@@ -139,10 +145,10 @@ addKeys conf@(XConfig {modMask = modm}) =
 
 
 
--- myStartupHook = do
-    -- setWMName "LG3D" --java hack
+myStartupHook = do
+  setWMName "LG3D" --java hack
 
-myLogHook h = dynamicLogWithPP ( defaultPP
+myLogHook h = dynamicLogWithPP ( def
   {
       ppCurrent         = dzenColor color15 background
     , ppVisible         = dzenColor color7 background
@@ -156,6 +162,7 @@ myLogHook h = dynamicLogWithPP ( defaultPP
                             -- TODO: Figure out why neither $HOME nor ~ work here and fix it.
                             "Full"                    ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_full.xbm)"
                             "Tabbed Simplest"         ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_full.xbm)"
+                            "Tabbed"                  ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_full.xbm)"
                             "Spacing 5 ResizableTall" ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_tall.xbm)"
                             "ResizableTall"           ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_tall.xbm)"
                             "Mirror ResizableTall"    ->  "^i(/home/joshproehl/.xmonad/dzen2/layout_mirror_tall.xbm)"
@@ -177,7 +184,8 @@ main = do
   dzenLeftBar   <- spawnPipe myXmonadBar
   dzenRightBar  <- spawnPipe myStatusBar
 
-  xmonad $ withUrgencyHook dzenUrgencyHook { args = ["-bg", "darkgreen", "-xs", "1"] }
+  xmonad $ docks
+         $ withUrgencyHook dzenUrgencyHook { args = ["-bg", "darkgreen", "-xs", "1"] }
          $ ewmh desktopConfig
     { terminal    = "terminator"
     , modMask     = mod4Mask  -- Use the "windows" key as the mod key.
@@ -185,12 +193,13 @@ main = do
     , borderWidth = 1
     , normalBorderColor = "#444444"
     , focusedBorderColor = "#005577"
-    , startupHook = docksStartupHook
-    , manageHook  = myManageHook <+> namedScratchpadManageHook scratchpads <+> manageHook defaultConfig
+    , startupHook = myStartupHook
+    , manageHook  = myManageHook <+> namedScratchpadManageHook scratchpads <+> manageHook def
     --, manageHook  = insertPosition Master Newer <+> manageDocks <+> myManageHook <+> manageHook defaultConfig
     , layoutHook  = myLayoutHook
     , logHook     = myLogHook dzenLeftBar <+> fadeWindowsLogHook myFadeHook
-    , handleEventHook = docksEventHook <+> fadeWindowsEventHook
+    , handleEventHook = fadeWindowsEventHook
+    --, handleEventHook = docksEventHook <+> fadeWindowsEventHook
     , workspaces      = myWorkspaces
     }
 
@@ -201,7 +210,7 @@ statusbarHeight = "14"
 trayerwidth = "90"
 
 -- EROSION EDIT
-myFont		= "-*-terminus-medium-*-normal-*-10-*-*-*-*-*-*-*"
+myFont = "-*-terminus-medium-*-normal-*-10-*-*-*-*-*-*-*"
 --myFont		= "-*-nu-*-*-*-*-*-*-*-*-*-*-*-*-*"
 background= "#181512"
 foreground= "#D6C3B6"
