@@ -5,6 +5,7 @@ import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog hiding (xmobar, xmobarPP, xmobarColor, sjanssenPP, byorgeyPP)
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.InsertPosition
+import XMonad.Hooks.FadeInactive
 import XMonad.Hooks.FadeWindows
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -197,7 +198,7 @@ main = do
     , manageHook  = myManageHook <+> namedScratchpadManageHook scratchpads <+> manageHook def
     --, manageHook  = insertPosition Master Newer <+> manageDocks <+> myManageHook <+> manageHook defaultConfig
     , layoutHook  = myLayoutHook
-    , logHook     = myLogHook dzenLeftBar <+> fadeWindowsLogHook myFadeHook
+    , logHook     = myLogHook dzenLeftBar <+> fadeWindowsLogHook myFadeHook <+> fadeInactiveLogHook 0.8
     , handleEventHook = fadeWindowsEventHook
     --, handleEventHook = docksEventHook <+> fadeWindowsEventHook
     , workspaces      = myWorkspaces
