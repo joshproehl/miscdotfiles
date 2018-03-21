@@ -22,4 +22,4 @@ statusWidth=$((primaryMonitorXWidth-xmonadStatusWidth-trayerWidth))
 # The right status bar
 conky -qc $HOME/.xmonad/conky_dzen | dzen2 -x $statusPosX -w $statusWidth -h $statusBarHeight -bg $background -fg $foreground -y $statusPosY -fn $font -e 'button3=' -dock &
 
-trayer --edge top --align right --expand false --SetDockType true --SetPartialStrut true --widthtype pixel --width $trayerWidth --heighttype pixel --height $statusBarHeight --transparent false --tint 0xD6C3B6 &
+trayer --monitor primary --edge top --align right --expand false --SetDockType true --SetPartialStrut true --widthtype pixel --width $trayerWidth --heighttype pixel --height $statusBarHeight --transparent false --tint 0xD6C3B6 &
