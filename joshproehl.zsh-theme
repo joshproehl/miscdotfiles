@@ -105,7 +105,7 @@ prompt_vimode() {
 prompt_main() {
   CURRENT_BG='NONE'
   prompt_userhost
-  prompt_rbenv
+  #prompt_rbenv
   prompt_path
   prompt_git
   prompt_vimode

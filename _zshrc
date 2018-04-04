@@ -26,9 +26,8 @@ plugins=(taskwarrior git ruby)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-PATH=$HOME/.bin:$HOME/.rbenv/bin:$(ruby -e 'print Gem.user_dir')/bin:$HOME/.composer/vendor/bin:$HOME/.cabal/bin:$HOME/workspace/go/bin/:$PATH
+PATH=$HOME/.bin:$HOME/.composer/vendor/bin:$HOME/.cabal/bin:$HOME/workspace/go/bin/:$PATH
 export GOPATH=$HOME/workspace/go
-eval "$(rbenv init -)"
 
 export DEFAULT_USER="joshproehl"
 export EDITOR="vim"
@@ -44,3 +43,7 @@ alias be="bundle exec"
 alias t=" task"
 alias tw=" timew"
 alias ts=" tasksh"
+
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
+alias aoeu="asdf" # It's doesn't really have the same effect when you type in dvorak...

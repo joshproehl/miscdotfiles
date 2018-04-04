@@ -24,6 +24,7 @@ Things to do beyond the bootstrap file. Perhaps a bit too complex to let bootstr
 
 * Run .vim/bundle/YouCompleteMe/install.py  (As of 2016/11 on Arch Linux script must be altered to call python2 out of env to run)
 * Run .vim/bundle/vimproc/make
+* Install latest ASDF to ~/.asdf. (https://github.com/asdf-vm/asdf)  (Should this be a submodule?)
 
 ## System Changes
 Arch Linux:
