@@ -65,8 +65,24 @@ set showmatch
 
 " Ctr-P defaults to files search only.
 let g:ctrlp_cmd = 'CtrlP'
-" And ctrl-b makes it easy to search throguh buffers.
-map <c-b> :CtrlPBuffer<cr>
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+map <C-b> :CtrlPBuffer<cr>
+map <C-m> :CtrlPMixed<cr>
+
+" Add a ctr-p delete buffer function
+" (https://gist.github.com/rainerborene/8074898)
+let g:ctrlp_buffer_func = { 'enter': 'CtrlPMappings' }
+function! CtrlPMappings()
+  nnoremap <buffer> <silent> <C-@> :call <sid>DeleteBuffer()<cr>
+endfunction
+function! s:DeleteBuffer()
+  let path = fnamemodify(getline('.')[2:], ':p')
+  let bufn = matchstr(path, '\v\d+\ze\*No Name')
+  exec "bd" bufn ==# "" ? path : bufn
+  exec "norm \<F5>"
+endfunction
+
+
 
 " Add tagbar binding
 nmap <F8> :TagbarToggle<CR>
