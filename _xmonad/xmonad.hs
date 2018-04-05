@@ -77,7 +77,7 @@ myLayoutHook = avoidStruts $ standardLayouts
   --onWorkspace "1:comm" imLayout $
   --spacing 0 $ standardLayouts
   where
-    standardLayouts = myTabbed ||| myResizableTall ||| Mirror myResizableTall -- ||| myZoomer -- spiral (6/7)
+    standardLayouts = myTabbed ||| Grid ||| myResizableTall ||| Mirror myResizableTall -- ||| myZoomer -- spiral (6/7)
     myResizableTall = ResizableTall 1 (3/100) (1/2) []
     myZoomer = limitWindows 3 $ magnifiercz' 1.4 $ FixedColumn 1 20 80 10
     myTabbed = tabbed shrinkText (theme kavonForestTheme)
