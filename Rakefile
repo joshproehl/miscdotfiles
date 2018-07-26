@@ -46,6 +46,13 @@ desc "Init and update all git submodules"
 task :submodule_update do
   puts " == Setting up submodules =="
   `git submodule update --init --recursive`
+  puts "   -- Done with (recursive) submodule update"
+end
+
+task :submodule_cleanup do
+  puts " == Cleaning up submodules =="
+  `git submodule foreach --recursive git reset --hard HEAD && git clean -fxd`
+  puts "   -- Done cleaning submodules"
 end
 
 
