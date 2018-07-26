@@ -103,3 +103,6 @@
 [submodule "_vim/pack/joshproehl/start/editorconfig"]
 	path = _vim/pack/joshproehl/start/editorconfig
 	url = https://github.com/editorconfig/editorconfig-vim.git
+[submodule "_asdf"]
+	path = _asdf
+	url = https://github.com/asdf-vm/asdf.git
