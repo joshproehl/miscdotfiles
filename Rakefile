@@ -9,12 +9,6 @@ task :link do
   puts "   -- Done AutoLinking."
 
   puts " == Handling manual links... =="
-  # Install the ruby-build plugin for rbenv only
-  if !File.exists?(File.expand_path("~/.rbenv/plugins/"))
-    mkdir File.expand_path("~/.rbenv/plugins/")
-  end
-  s_link("bundle/ruby-build", "~/.rbenv/plugins/ruby-build")
-
   # Link in my own ZSH theme.
   s_link("joshproehl.zsh-theme", "~/.oh-my-zsh/custom/joshproehl.zsh-theme")
 
@@ -49,11 +43,11 @@ end
 
 
 desc "Init and update all git submodules"
-task :submodule_init do
+task :submodule_update do
   puts " == Setting up submodules =="
   `git submodule update --init --recursive`
 end
 
 
 desc "Run this to perform all necessary tasks to setting up a completely new instance."
-task :bootstrap => [ :submodule_init, :link ]
+task :bootstrap => [ :submodule_update, :link ]
