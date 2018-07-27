@@ -8,6 +8,21 @@ task :link do
   end
   puts "   -- Done AutoLinking."
 
+  puts " == AutoLinking all XDG_CONFIG/ with their $XDG_CONFIG_HOME/ location. =="
+  Dir.glob("XDG_CONFIG/*") do |filename|
+    xdgDir = ENV["XDG_CONFIG_HOME"] != nil ? ENV["XDG_CONFIG_HOME"] : "~/.config/" 
+    unless xdgDir[-1] == "/"
+      xdgDir = xdgDir+"/"
+    end
+    unless File.directory?(xdgDir)
+      FileUtils.mkdir_p(xdgDir)
+    end
+    newFilename = xdgDir+filename.gsub(/XDG_CONFIG\//, "")
+    puts "    * Ensuring #{filename} linked to #{newFilename}"
+    s_link(filename, newFilename)
+  end
+  puts "   -- Done AutoLinking XDG_CONFIG."
+
   puts " == Handling manual links... =="
   # Link in my own ZSH theme.
   s_link("joshproehl.zsh-theme", "~/.oh-my-zsh/custom/joshproehl.zsh-theme")
