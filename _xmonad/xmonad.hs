@@ -1,5 +1,6 @@
 import XMonad
 import XMonad.Actions.CycleWS
+import XMonad.Actions.TagWindows
 import XMonad.Actions.Warp
 import XMonad.Config.Desktop
 import XMonad.Hooks.DynamicLog hiding (xmobar, xmobarPP, xmobarColor, sjanssenPP, byorgeyPP)
@@ -32,18 +33,64 @@ import System.IO
 import Data.List
 
 
+-- | Check if the current window has a specific tag
+isTagged :: String -> Query Bool
+isTagged t =  ask >>= \w -> liftX $ hasTag t w
 
--- TODO: Create workspace on the fly for Gimp?
+-- | Check if the given window has one of the given titles
+-- For example, a Chromium window opened to https://overwatchleague.com has the title "The Overwatch League - Chromium"
+-- and a window opened to https://twitch.tv/overwatchleague has the title "OverwatchLeague",
+-- so we can ensure that both of them never go transparent by using:
+-- titleContains "OverwatchLeague" --> opaque
+titleContains :: String -> Query Bool
+titleContains t = ask >>= \w -> do
+  wt <- title 
+  return $ t `isSubsequenceOf` wt 
+
+-- | Check if the given window's title begins with any of the strings in the given array.
+-- Prefix is used because we often want a website title or something, but don't want to include the " - Chromium" suffix.
+-- By adding "Inbox (" as an prefix to keep opaque you can make it so that any tab that's open that has a GMail Inbox view
+-- will not be made transparent, but if you change your Gmail to be viewing anything other than the Inbox the entire window
+-- will become opaque when not active.
+hasTitlePrefixIn :: [String] -> Query Bool
+hasTitlePrefixIn titles = ask >>= \w -> do
+  windowTitle <- title
+  return $ findMatchingPrefixIn titles windowTitle 
+  where
+    findMatchingPrefixIn [] _      = False
+    findMatchingPrefixIn (p:ps) wt | p `isPrefixOf` wt  = True
+                                   | otherwise          = findMatchingPrefixIn ps wt
+  
+-- |  Add "toggleTag" for XMonad.Actions.TagWindows
+--toggleTag :: String -> Window -> X ()
+--toggleTag s w = do
+--  tags <- getTags w
+--  tt w s tags
+--  where
+--    tt w s tags | liftX (hasTag s w) == True    = do delTag s w
+--                | otherwise                     = do addTag s w
+
+
+
 
 -- Set up the hook for fadeWindows
 -- Note that these go left-to-right, so opaque is the default and other properties are applied in order. (Last prop wins)
+-- (Which is contrary to the Xmonad.Hooks.FadeWindows hackage documentation as of 2018/04/10)
 myFadeHook = composeAll
-  [ opaque
-  , isUnfocused --> opacity 0.95    -- Unfocused is 90% of opaque
-  , isFloating  --> opacity 0.99    -- Floating windows less transparent than what they're on top of
-  , isDialog    --> opaque          -- Dialog windows should go on top
+  [ opaque                                           -- By default all windows are opaque
+  , isUnfocused                     --> opacity 0.65 -- How transparent are unfocused windows?
+  , isFloating                      --> opacity 0.90 -- Floating windows should less transparent than what they're on top of
+  , isDialog                        --> opaque       -- Dialog windows should go on top so they don't vanish, make them opaque
+  , isTagged "_KEEP_OPAQUE"         --> opaque
+  , titleContains "OverwatchLeague" --> opaque
+  , hasTitlePrefixIn myOpaqueTitles --> opaque
   ]
-
+  where
+    myOpaqueTitles =
+      [ "Inbox ("
+      , "Duolingo"
+      , "Learn language in context - Clozemaster"
+      ]
 
 -- Manage all of the various floation requirements
 -- and send certain apps to certain places.
@@ -108,6 +155,11 @@ addKeys conf@(XConfig {modMask = modm}) =
   , ((modm,               xK_q),      spawn "killall dzen2; killall conky; killall trayer; xmonad --restart")
 
   , ((modm .|. shiftMask, xK_b),      sendMessage ToggleStruts)
+
+  -- Tag/Untag window as "don't ever be transparent"
+  -- Can this be merged into a single function that tags if untagged and untags if currently tagged?
+  , ((modm,               xK_f),      withFocused (addTag "_KEEP_OPAQUE"))
+  , ((modm .|. shiftMask, xK_f),      withFocused (delTag "_KEEP_OPAQUE"))
 
   -- Cycle to workspaces
   , ((modm,               xK_Right),  nextWS)
