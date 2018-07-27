@@ -1,6 +1,7 @@
 _vim/swp/*.swp
 _vim/undo/*
 _vim/.netrwhist
+_vim/plugged/*
 
 _xmonad/*.o
 _xmonad/*.hi

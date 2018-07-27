@@ -1,5 +1,8 @@
 call pathogen#infect()
 
+call plug#begin('~/.vim/plugged')
+call plug#end()
+
 set nocompatible
 
 " I use Dvorak keyboard layout, so let's do a few things for that
