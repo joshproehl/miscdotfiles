@@ -1,8 +1,62 @@
-call pathogen#infect()
-
+"""""""""""""""""""
+" Vim-Plug Plugins
 call plug#begin('~/.vim/plugged')
+
+" Theming
+Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
+
+" Movement and editing
+Plug 'Shougo/neoyank.vim'
+Plug 'tpope/vim-surround'
+Plug 'vim-scripts/camelcasemotion'
+Plug 'scrooloose/nerdcommenter'
+
+" Misc UI stuff
+Plug 'majutsushi/tagbar'
+Plug 'mbbill/undotree'
+Plug 'airblade/vim-gitgutter'
+
+" Support editorconfig.org .editorconfig files
+Plug 'editorconfig/editorconfig-vim'
+
+" NerdTree and dependencies
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+" Unite and dependencies
+Plug 'Shougo/unite.vim' 
+Plug 'Shougo/neomru.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'osyo-manga/unite-quickfix' " QuickFix source for unite
+Plug 'gregsexton/gitv' " Fugitive extension for Git
+
+" Airline and dependencies
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Ctrl-P and it's dependencies
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rking/ag.vim'
+
+" Autocomplete / Syntax
+Plug 'scrooloose/syntastic'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+
+" Languages and frameworks
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'lumiliet/vim-twig', { 'for': 'twig' }
+
+" Plugins that I used to use that aren't currently installed
+" Plug('Shougo/vimproc.vim')
+" Plug('farseer90718/vim-taskwarrior')
+" Plug('vim-scripts/vimwiki.git')
+" Plug('jamessan/vim-gnupg')
+" Plug('tpope/vim-rails')
+
 call plug#end()
+" End Vim-Plug Plugins
+"""""""""""""""""""""""
 
 set nocompatible
 
