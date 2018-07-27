@@ -46,6 +46,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Languages and frameworks
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'lumiliet/vim-twig', { 'for': 'twig' }
+Plug 'slashmili/alchemist.vim'
 
 " Plugins that I used to use that aren't currently installed
 " Plug('Shougo/vimproc.vim')
