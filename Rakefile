@@ -36,14 +36,14 @@ def s_link(source_path, target_path)
 
   # If the target file exists we don't really want to destroy it...
   if File.exists?(target_file) and not File.symlink?(target_file)
-    puts "  ! Stashing your previous #{target_path} as #{target_path}.old"
-    mv(target_file, File.expand_path("#{target_path}.old"))
+    puts "  ! Stashing your previous #{target_path} as #{target_path}.pre-mdf-bootstrap"
+    mv(target_file, File.expand_path("#{target_path}.pre-mdf-bootstrap"))
   end
 
   if File.symlink?(target_file) and File.readlink(target_file).to_s != File.expand_path(source_path).to_s
-    puts "  ! Existing symlink appears to point to incorrect file, moving it to #{target_file}.old"
+    puts "  ! Existing symlink appears to point to incorrect file, moving it to #{target_file}.pre-mdf-bootstrap"
     # Make a new link with the .old extension, pointing to the old target
-    ln_s(File.readlink(target_file), File.expand_path("#{target_path}.old"))
+    ln_s(File.readlink(target_file), File.expand_path("#{target_path}.pre-mdf-bootstrap"))
     # Now we can get rid of the original target file to make room for the new link
     rm(target_file)
   end
