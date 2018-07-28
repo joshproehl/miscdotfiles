@@ -22,9 +22,10 @@ Do do this all on Arch: `pacman -Sy git ruby python zsh xmonad xmonad-contrib ba
 ## Post Bootstrap
 Things to do beyond the bootstrap file. Perhaps a bit too complex to let bootstrap do it?
 
-* Run .vim/bundle/YouCompleteMe/install.py  (As of 2016/11 on Arch Linux script must be altered to call python2 out of env to run)
-* Run .vim/bundle/vimproc/make
-* Install latest ASDF to ~/.asdf. (https://github.com/asdf-vm/asdf)  (Should this be a submodule?)
+* -- DEPRECATED, Plugin currently not used:  Run .vim/bundle/YouCompleteMe/install.py  (As of 2016/11 on Arch Linux script must be altered to call python2 out of env to run)
+* -- DEPRECATED, Plugin currently not used   Run .vim/bundle/vimproc/make
+* `asdf install` to install global versions of asdf-managed tools
+* `pip install neovim` to get Neovim's Phython integration dependency
 
 ## System Changes
 Arch Linux:
