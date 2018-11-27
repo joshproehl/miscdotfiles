@@ -64,7 +64,7 @@ From AUR
 * yegonesh
 * python2-deepin-ui (Still using this?)
 * caffeine-ng-git (Switched to -git because regular version eats all your ram.)
-* ttf-iosevk
+* ttf-iosevka ttf-envy-code-r
 * alacritty-git (Using instead of Terminator in some cases)
 
 ## Other random things
