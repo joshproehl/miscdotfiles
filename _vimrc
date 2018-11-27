@@ -21,7 +21,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 
 " NerdTree and dependencies
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree' ", { 'on': 'NERDTreeToggle' }
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Unite and dependencies
@@ -51,9 +51,13 @@ else
 endif
 let g:deoplete#enable_at_startup = 1
 
+" Extra-VIM GUI stuff
+Plug 'equalsraf/neovim-gui-shim'
+
 " Languages and frameworks
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'lumiliet/vim-twig', { 'for': 'twig' }
+Plug 'elixir-editors/vim-elixir'
 Plug 'slashmili/alchemist.vim'
 
 " Plugins that I used to use that aren't currently installed
@@ -87,6 +91,7 @@ inoremap <Down> <NOP>
 " Set color and make GUI and Terminal look different
 "colorscheme solarized
 "colorscheme base16-default
+" TODO: Is this supposed to be base16-monokai ?
 colorscheme monokai
 "if has('gui_running')
 "    set background=light
@@ -149,7 +154,8 @@ function! s:DeleteBuffer()
   exec "norm \<F5>"
 endfunction
 
-
+" Enable deoplete
+let g:deoplete#enable_at_startup = 1
 
 " Add tagbar binding
 nmap <F8> :TagbarToggle<CR>
@@ -175,9 +181,6 @@ let macvim_hig_shift_movement = 1
 
 " OSX Clipboard support
 set clipboard=unnamed
-
-" Let's give this vimwiki thing a try. Store files in a SyncThing folder.
-let g:vimwiki_list=[{'path': '~/JCloud/.vimwiki', 'path_html': '~/JCloud/.vimwiki_html'}]
 
 syntax match Tab /\t/
 hi Tab gui=underline guifg=blue ctermbg=blue
