@@ -57,8 +57,20 @@ Plug 'equalsraf/neovim-gui-shim'
 " Languages and frameworks
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'lumiliet/vim-twig', { 'for': 'twig' }
+
+" Elixir
 Plug 'elixir-editors/vim-elixir'
+  " - IDE-ish features: 
 Plug 'slashmili/alchemist.vim'
+  " - Treat blocks as text objects:
+Plug 'kana/vim-textobj-user'
+Plug 'andyl/vim-textobj-elixir'
+  " - Add :MixFormat command:
+Plug 'mhinz/vim-mix-format'
+
+" Other
+Plug 'janko/vim-test'
+"Plug 'neomake/neomake'    " Found in Elixir plugins list
 
 " Plugins that I used to use that aren't currently installed
 " Plug('Shougo/vimproc.vim')
