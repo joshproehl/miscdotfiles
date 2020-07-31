@@ -35,6 +35,9 @@ export EDITOR="nvim"
 bindkey -v
 bindkey "^R" history-incremental-search-backward
 
+# Useful Alias
+alias vi="nvim"
+
 # Development shortcuts
 alias gpoh="git push origin HEAD"
 alias be="bundle exec"
@@ -44,6 +47,14 @@ alias t=" task"
 alias tw=" timew"
 alias ts=" tasksh"
 
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
-alias aoeu="asdf" # It's doesn't really have the same effect when you type in dvorak...
+# Help poor old GPG
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# Use the /opt/asdf-vm path installed by AUR package ASDF-VM
+. /opt/asdf-vm/asdf.sh
+alias aoeu="asdf" # It's name doesn't really have the same effect when you type in dvorak...
+
+function "which package contains"() {
+  pacman -Qo "$@"
+}

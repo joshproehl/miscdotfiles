@@ -49,7 +49,6 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-let g:deoplete#enable_at_startup = 1
 
 " Extra-VIM GUI stuff
 Plug 'equalsraf/neovim-gui-shim'
@@ -71,6 +70,7 @@ Plug 'mhinz/vim-mix-format'
 " Other
 Plug 'janko/vim-test'
 "Plug 'neomake/neomake'    " Found in Elixir plugins list
+Plug 'https://github.com/cyberkov/openhab-vim.git'
 
 " Plugins that I used to use that aren't currently installed
 " Plug('Shougo/vimproc.vim')
@@ -140,6 +140,8 @@ set go-=rRlLbh  " now hide all scrollbars
 " Set up vim-airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
 
 " Highlighting for search results, plus a shortcut to un-highlight them.
 nnoremap <leader><space> :noh<cr>
@@ -166,8 +168,10 @@ function! s:DeleteBuffer()
   exec "norm \<F5>"
 endfunction
 
-" Enable deoplete
+" Enable and configure deoplete
+"  - Use Tab for completion
 let g:deoplete#enable_at_startup = 1
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Add tagbar binding
 nmap <F8> :TagbarToggle<CR>

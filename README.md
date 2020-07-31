@@ -15,6 +15,7 @@ Needs to be installed before this can be bootstrapped:
 For (Arch) linux:
 * Xmonad and xmonad contrib - For XMonad
 * base-devel - The entire group is needed for building various things
+* AUR package asdf-vm - A global install of ASDF to share between users (Easiest to set up after Aura is installed)
 
 Do do this all on Arch: `pacman -Sy git ruby python zsh xmonad xmonad-contrib base-devel`
 
