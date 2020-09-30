@@ -37,7 +37,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Ctrl-P and it's dependencies
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'rking/ag.vim'
+
+" File contents searching
+Plug 'mhinz/vim-grepper'
 
 " Autocomplete / Syntax
 Plug 'scrooloose/syntastic'
@@ -153,10 +155,10 @@ set showmatch
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 map <C-b> :CtrlPBuffer<cr>
-map <C-m> :CtrlPMixed<cr>
 
 " Add a ctr-p delete buffer function
 " (https://gist.github.com/rainerborene/8074898)
+
 let g:ctrlp_buffer_func = { 'enter': 'CtrlPMappings' }
 function! CtrlPMappings()
   nnoremap <buffer> <silent> <C-@> :call <sid>DeleteBuffer()<cr>
@@ -167,6 +169,17 @@ function! s:DeleteBuffer()
   exec "bd" bufn ==# "" ? path : bufn
   exec "norm \<F5>"
 endfunction
+
+" Configure <leader>g to cycle through vim-grepper grep tools
+nnoremap <leader>g :Grepper -tool ag<cr>
+nnoremap <leader>G :Grepper -tool git<cr>
+nnoremap <leader>* :Grepper -tool ag -cword -noprompt<cr>
+"let g:grepper = { 'next_tool': '<leader>g' }
+" configure the gs operator to allow gsW, gsi", etc
+nmap gs <plug>(GrepperOperator)
+xmap gs <plug>(GrepperOperator)
+" Help my poor muscle-memory recover from ag.vim mapping
+cabbrev Ag GrepperAg
 
 " Enable and configure deoplete
 "  - Use Tab for completion
@@ -189,6 +202,8 @@ set directory=~/.vim/swp
 
 " Set up NERDTree
 nnoremap <leader>n :NERDTreeToggle<cr>
+" Open NERDTree to the currently open file
+nnoremap <leader>r :NERDTreeFind<cr>
 let g:NERDTreeWinPos = "right"
 let NERDTreeQuitOnOpen=1
 
