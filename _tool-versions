@@ -2,4 +2,4 @@ elixir 1.10.4-otp-22
 ruby 2.5.1
 nodejs 8.11.3
 erlang 22.3.4.4
-python 3.8.0
+python system
