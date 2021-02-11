@@ -8,9 +8,7 @@ This repo is expected to be cloned to ~/.miscdotfiles
 Needs to be installed before this can be bootstrapped:
 * Git - To get this, plus submodules.
 * Ruby (LibYAML) - For Rake
-* Python2 - (For YouCompleteMe bootstraping)
 * ZSH - Because it's the shell
-* CMake - For YouCompleteMe's install script
 
 For (Arch) linux:
 * Xmonad and xmonad contrib - For XMonad
@@ -22,29 +20,27 @@ Do do this all on Arch: `pacman -Sy git ruby python zsh xmonad xmonad-contrib ba
 
 ## Post Bootstrap
 Things to do beyond the bootstrap file. Perhaps a bit too complex to let bootstrap do it?
-
-* -- DEPRECATED, Plugin currently not used:  Run .vim/bundle/YouCompleteMe/install.py  (As of 2016/11 on Arch Linux script must be altered to call python2 out of env to run)
-* -- DEPRECATED, Plugin currently not used   Run .vim/bundle/vimproc/make
 * `asdf install` to install global versions of asdf-managed tools
-* `pip install neovim` to get Neovim's Phython integration dependency
+* `pip install neovim` (pip3 may be necessary) to get Neovim's Phython integration dependency. You may need to run :UpdateRemotePlugins after this
 
 ## System Changes
 Arch Linux:
-  Add the line "export _JAVA_AWT_WM_NONREPARENTING=1" to /etc/profile.d/jre.sh to ensure java apps all launch with that environment variable.
-  `sudo mv 01-keyboard-layout.conf /etc/X11/xorg.conf.d/`
-  Set primary monitor (/etc/X11/10-monitor.conf, or xrandr)
+* XMonad: Add the line "export _JAVA_AWT_WM_NONREPARENTING=1" to /etc/profile.d/jre.sh to ensure java apps all launch with that environment variable.
+* `sudo mv 01-keyboard-layout.conf /etc/X11/xorg.conf.d/`
+* Set primary monitor (/etc/X11/10-monitor.conf, or xrandr. Nvidia settings doesn't seem to set primary in a way that works)
 
 ## Arch Packages
 Other things Arch expects to have set up:
 
 ## Set up Aura AUR helper.
-git clone https://aur.archlinux.org/aura-bin.git
-cd aura-bin
-makepkg -si
+* `git clone https://aur.archlinux.org/aura-bin.git`
+* `cd aura-bin`
+* `makepkg -si`
 
 Regular packages
-* feh
-* xorg-xsetroot
+* xmonad specific:
+  * feh
+  * xorg-xsetroot
 * redshift
 * terminus-font
 * ttf-dejavu, ttf-droid, ttf-anonymous-pro
@@ -57,14 +53,13 @@ Regular packages
 * dmenu (app launch script/yegonesh needs)
 
 From AUR
-* rbenv  (This caused errors because of the .rbenv directory linked from the bootstrap)
-* trayer-srg
+* xmonad specific
+  * trayer-srg
+  * caffeine-ng-git (Switched to -git because regular version eats all your ram.)
 * compton
 * copyq
 * dropbox
 * yegonesh
-* python2-deepin-ui (Still using this?)
-* caffeine-ng-git (Switched to -git because regular version eats all your ram.)
 * ttf-iosevka ttf-envy-code-r
 * alacritty-git (Using instead of Terminator in some cases)
 
