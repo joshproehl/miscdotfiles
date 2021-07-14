@@ -1,0 +1,9 @@
+""" Idea specific settings ------------------
+set ideaput
+set ideamarks
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+
+""" Let's try and be as vim-like as possible!
+source ~/.vimrc
