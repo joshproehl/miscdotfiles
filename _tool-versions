@@ -1,5 +1,5 @@
 elixir 1.10.4-otp-22
-ruby 2.5.1
+ruby system
 nodejs 8.11.3
 erlang 22.3.4.4
 python system
