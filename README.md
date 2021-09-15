@@ -1,3 +1,8 @@
+# DEPRECATED
+See [dotfiles](https://github.com/joshproehl/dotfiles) instead.
+
+----------
+
 # Josh Proehl's MiscDotFiles
 This is how I bootstrap my favored environment and configurations onto a new machine and keep all my various machines in sync.
 These configs are designed to work on both Linux (ArchLinux is my preference) and OSX.
